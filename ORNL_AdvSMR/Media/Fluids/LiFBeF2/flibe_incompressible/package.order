@@ -1,0 +1,16 @@
+p0
+T0
+cp0
+rho0
+beta_r
+h0
+eta0
+lambda0
+ThermodynamicState
+BaseProperties
+specificHeatCapacityCp
+specificHeatCapacityCv
+density_derh_p
+density_derp_h
+dynamicViscosity
+thermalConductivity

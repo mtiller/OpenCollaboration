@@ -1,0 +1,449 @@
+within ORNL_AdvSMR.PRISM.PowerConversionSystem;
+model PRISMFull
+  import aSMR = ORNL_AdvSMR;
+
+  ORNL_AdvSMR.Components.TenStageLowPressureTurbine tenStageLowPressureTurbine(
+    Kt=0.005,
+    wnom=75.74,
+    w_tap1=0,
+    w_tap2=0,
+    w_tap3=0,
+    PRstart=20,
+    pnom=1000000,
+    p_nom2=500000,
+    p_nom3=300000,
+    p_nom4=200000)
+    annotation (Placement(transformation(extent={{-42,-20},{-2,20}})));
+
+  ORNL_AdvSMR.Components.FourStageTurbinewithSteamExtraction fourStageTurbinewithSteamExtraction(
+    PRstart=20,
+    Kt=0.005,
+    wstart=1722.47,
+    explicitIsentropicEnthalpy=true,
+    allowFlowReversal=false,
+    w_tap1=265.4,
+    w_tap2=127.38,
+    w_tap3=75.74,
+    wnom=1722.47,
+    pnom=23500000,
+    p_nom2=7000000,
+    p_nom3=4500000,
+    p_nom4=2300000)
+    annotation (Placement(transformation(extent={{-77,-10},{-57,10}})));
+
+  inner ORNL_AdvSMR.System system(allowFlowReversal=false, Dynamics=ORNL_AdvSMR.Choices.System.Dynamics.FixedInitial)
+    annotation (Placement(transformation(extent={{150,80},{170,100}})));
+  ORNL_AdvSMR.Interfaces.Sensors sensors
+    annotation (Placement(transformation(extent={{88,30},{98,40}})));
+  ORNL_AdvSMR.Interfaces.Actuators actuators
+    annotation (Placement(transformation(extent={{88,-40},{98,-30}})));
+  ORNL_AdvSMR.PRISM.PowerConversionSystem.CondenserGroup.CondPlant_cc condPlant_cc(
+    setPoint_ratio=0.85,
+    SSInit=false,
+    p=5000,
+    Vtot=1000,
+    Vlstart=150)
+    annotation (Placement(transformation(extent={{-10,-95},{10,-75}})));
+  ORNL_AdvSMR.PRISM.PowerConversionSystem.ElectricGeneratorGroup.Examples.SingleShaft_static
+    singleShaft_static(
+    Pn=5000e6,
+    eta=0.9,
+    J_shaft=100,
+    omega_nom=314.16/2,
+    SSInit=true)
+    annotation (Placement(transformation(extent={{68,-10},{88,10}})));
+  Modelica.Mechanics.Rotational.Sources.ConstantSpeed shaftSpeed(
+      w_fixed=314.16/2, useSupport=false) annotation (Placement(
+        transformation(extent={{-170,-10},{-150,10}},rotation=0)));
+  Modelica.Blocks.Sources.BooleanConstant breakerSwitch(k=false)
+    annotation (Placement(transformation(extent={{58,-40},{68,-30}})));
+  ORNL_AdvSMR.Components.TenStageLowPressureTurbine tenStageLowPressureTurbine1(
+    Kt=0.005,
+    wnom=75.74,
+    w_tap1=0,
+    w_tap2=0,
+    w_tap3=0,
+    PRstart=20,
+    pnom=1000000,
+    p_nom2=500000,
+    p_nom3=300000,
+    p_nom4=200000)
+    annotation (Placement(transformation(extent={{13,-20},{53,20}})));
+  aSMR.Components.FlowSplit flowSplit
+    annotation (Placement(transformation(extent={{-52,15},{-42,25}})));
+  aSMR.Interfaces.FlangeA steam1 annotation (Placement(transformation(extent={{
+            -179,75},{-159,95}}), iconTransformation(extent={{-179,75},{-159,95}})));
+  aSMR.Interfaces.FlangeA steam2 annotation (Placement(transformation(extent={{
+            -179,50},{-159,70}}), iconTransformation(extent={{-155,60},{-135,80}})));
+  aSMR.Interfaces.FlangeA steam3 annotation (Placement(transformation(extent={{
+            -179,25},{-159,45}}), iconTransformation(extent={{-155,60},{-135,80}})));
+  aSMR.Components.ValveVap stopV1
+    annotation (Placement(transformation(extent={{-145,80},{-135,90}})));
+  aSMR.Components.ValveVap stopV2
+    annotation (Placement(transformation(extent={{-145,55},{-135,65}})));
+  aSMR.Components.ValveVap stopV3
+    annotation (Placement(transformation(extent={{-145,30},{-135,40}})));
+  aSMR.Components.FlowJoin flowJoin
+    annotation (Placement(transformation(extent={{-130,62},{-110,82}})));
+  aSMR.Components.FlowJoin flowJoin1
+    annotation (Placement(transformation(extent={{-110,58},{-90,78}})));
+  aSMR.Components.Mixer mixer annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={25,-35.5})));
+  aSMR.Components.ValveVap bypassValve annotation (Placement(transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=270,
+        origin={-85,-25})));
+  aSMR.Components.FlowJoin flowJoin2 annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={0,-62.5})));
+  Modelica.Mechanics.Rotational.Components.Inertia shaftInertia
+    annotation (Placement(transformation(extent={{-125,-10},{-105,10}})));
+  Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus controlBus
+    annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={165,0})));
+  aSMR.Components.SensT Tsteam annotation (Placement(transformation(
+        extent={{7.5,7.5},{-7.5,-7.5}},
+        rotation=90,
+        origin={-72,37.5})));
+  aSMR.Components.SensT Tsteam1 annotation (Placement(transformation(
+        extent={{5,5},{-5,-5}},
+        rotation=180,
+        origin={-155,87})));
+  aSMR.Components.SensT Tsteam2 annotation (Placement(transformation(
+        extent={{5,5},{-5,-5}},
+        rotation=180,
+        origin={-155,62})));
+  aSMR.Components.SensT Tsteam3 annotation (Placement(transformation(
+        extent={{5,5},{-5,-5}},
+        rotation=180,
+        origin={-155,37})));
+  aSMR.Interfaces.FlangeB condensate
+    annotation (Placement(transformation(extent={{-179,-109},{-159,-89}})));
+  aSMR.Components.StateReader_water STflowRate annotation (Placement(
+        transformation(
+        extent={{-7.5,-7.5},{7.5,7.5}},
+        rotation=270,
+        origin={-75,20})));
+  aSMR.Components.StateReader_water FWflowRate annotation (Placement(
+        transformation(
+        extent={{7.5,-7.75},{-7.5,7.75}},
+        rotation=0,
+        origin={-82.5,-99.25})));
+  aSMR.Components.ValveVap TCV annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=270,
+        origin={-75,57.5})));
+equation
+  connect(singleShaft_static.ActuatorsBus, actuators) annotation (Line(
+      points={{88,-7},{108,-7},{108,-35},{93,-35}},
+      color={85,255,85},
+      thickness=1,
+      smooth=Smooth.None), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(singleShaft_static.SensorsBus, sensors) annotation (Line(
+      points={{88,-4},{117.5,-4},{117.5,35},{93,35}},
+      color={255,170,213},
+      thickness=1,
+      smooth=Smooth.None), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(condPlant_cc.SensorsBus, singleShaft_static.SensorsBus)
+    annotation (Line(
+      points={{9.8,-89},{117.5,-89},{117.5,-4},{88,-4}},
+      color={255,170,213},
+      thickness=1,
+      smooth=Smooth.None));
+  connect(actuators, condPlant_cc.ActuatorsBus) annotation (Line(
+      points={{93,-35},{108,-35},{108,-92.2},{9.8,-92.2}},
+      color={85,255,85},
+      thickness=1,
+      smooth=Smooth.None), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(breakerSwitch.y, actuators.breakerClosed) annotation (Line(
+      points={{68.5,-35},{93,-35}},
+      color={255,0,255},
+      thickness=1,
+      smooth=Smooth.None), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(fourStageTurbinewithSteamExtraction.shaft_b,
+    tenStageLowPressureTurbine.shaft_a) annotation (Line(
+      points={{-57,0},{-42,0}},
+      color={0,0,0},
+      thickness=1,
+      smooth=Smooth.None));
+  connect(tenStageLowPressureTurbine1.shaft_b, singleShaft_static.shaft)
+    annotation (Line(
+      points={{53,0},{68,0}},
+      color={0,0,0},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(tenStageLowPressureTurbine1.shaft_a, tenStageLowPressureTurbine.shaft_b)
+    annotation (Line(
+      points={{13,0},{-2,0}},
+      color={0,0,0},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(fourStageTurbinewithSteamExtraction.turbineOutlet, flowSplit.in1)
+    annotation (Line(
+      points={{-60.5,10},{-60.5,20},{-50,20}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(flowSplit.out2, tenStageLowPressureTurbine.turbineInlet) annotation (
+      Line(
+      points={{-44,18},{-22,18},{-22,10}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(flowSplit.out1, tenStageLowPressureTurbine1.turbineInlet) annotation (
+     Line(
+      points={{-44,22},{33,22},{33,10}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(stopV1.outlet, flowJoin.in1) annotation (Line(
+      points={{-135,85},{-130,85},{-130,76},{-126,76}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(stopV2.outlet, flowJoin.in2) annotation (Line(
+      points={{-135,60},{-130,60},{-130,68},{-126,68}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(stopV3.outlet, flowJoin1.in2) annotation (Line(
+      points={{-135,35},{-110,35},{-110,64},{-106,64}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(flowJoin.out, flowJoin1.in1) annotation (Line(
+      points={{-114,72},{-106,72}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(actuators, stopV1.theta) annotation (Line(
+      points={{93,-35},{130,-35},{130,100},{-140,100},{-140,90}},
+      color={85,255,85},
+      smooth=Smooth.None), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(actuators, stopV2.theta) annotation (Line(
+      points={{93,-35},{125,-35},{125,75},{-140,75},{-140,65}},
+      color={85,255,85},
+      smooth=Smooth.None), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(actuators, stopV3.theta) annotation (Line(
+      points={{93,-35},{120,-35},{120,50},{-140,50},{-140,40}},
+      color={85,255,85},
+      smooth=Smooth.None), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(tenStageLowPressureTurbine.tap3, mixer.in2) annotation (Line(
+      points={{-22,-9},{-22,-21},{19,-21},{19,-27.5}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(tenStageLowPressureTurbine1.tap3, mixer.in1) annotation (Line(
+      points={{33,-9},{33,-20.5},{31,-20.5},{31,-27.5}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(flowJoin1.out, bypassValve.inlet) annotation (Line(
+      points={{-94,68},{-85,68},{-85,-15}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(flowJoin2.out, condPlant_cc.SteamIn) annotation (Line(
+      points={{0,-68.5},{0,-75}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(flowJoin2.in1, mixer.out) annotation (Line(
+      points={{4,-56.5},{4,-50},{25,-50},{25,-45.5}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(bypassValve.outlet, flowJoin2.in2) annotation (Line(
+      points={{-85,-35},{-85,-50},{-4,-50},{-4,-56.5}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(shaftInertia.flange_b, fourStageTurbinewithSteamExtraction.shaft_a)
+    annotation (Line(
+      points={{-105,0},{-77,0}},
+      color={0,0,0},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(actuators, bypassValve.theta) annotation (Line(
+      points={{93,-35},{130,-35},{130,-75},{-105,-75},{-105,-25},{-95,-25}},
+      color={85,255,85},
+      smooth=Smooth.None), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(shaftSpeed.flange, shaftInertia.flange_a) annotation (Line(
+      points={{-150,0},{-125,0}},
+      color={0,0,0},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(controlBus, sensors) annotation (Line(
+      points={{165,0},{140,0},{140,35},{93,35}},
+      color={255,204,51},
+      thickness=0.5,
+      smooth=Smooth.None));
+  connect(controlBus, actuators) annotation (Line(
+      points={{165,0},{140,0},{140,-35},{93,-35}},
+      color={255,204,51},
+      thickness=0.5,
+      smooth=Smooth.None));
+  connect(steam1, Tsteam1.inlet) annotation (Line(
+      points={{-169,85},{-158,85}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(Tsteam1.outlet, stopV1.inlet) annotation (Line(
+      points={{-152,85},{-145,85}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(steam2, Tsteam2.inlet) annotation (Line(
+      points={{-169,60},{-158,60}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(Tsteam2.outlet, stopV2.inlet) annotation (Line(
+      points={{-152,60},{-145,60}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(steam3, Tsteam3.inlet) annotation (Line(
+      points={{-169,35},{-158,35}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(Tsteam3.outlet, stopV3.inlet) annotation (Line(
+      points={{-152,35},{-145,35}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(Tsteam.outlet, STflowRate.inlet) annotation (Line(
+      points={{-75,33},{-75,24.5}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(STflowRate.outlet, fourStageTurbinewithSteamExtraction.turbineInlet)
+    annotation (Line(
+      points={{-75,15.5},{-75,8}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(FWflowRate.inlet, condPlant_cc.WaterOut) annotation (Line(
+      points={{-78,-99.25},{0,-99.25},{0,-95}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(FWflowRate.outlet, condensate) annotation (Line(
+      points={{-87,-99.25},{-169,-99.25},{-169,-99}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(Tsteam.inlet, TCV.outlet) annotation (Line(
+      points={{-75,42},{-75,52.5}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(flowJoin1.out, TCV.inlet) annotation (Line(
+      points={{-94,68},{-75,68},{-75,62.5}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(actuators, TCV.theta) annotation (Line(
+      points={{93,-35},{135,-35},{135,57.5},{-70,57.5}},
+      color={85,255,85},
+      smooth=Smooth.None), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  annotation (
+    Diagram(coordinateSystem(
+        preserveAspectRatio=false,
+        extent={{-175,-105},{175,105}},
+        grid={0.5,0.5}), graphics={Text(
+                  extent={{-75,-13},{-55,-18}},
+                  lineColor={0,0,255},
+                  lineThickness=1,
+                  textStyle={TextStyle.Bold},
+                  textString="High-Pressure
+Turbine"),
+  Text(           extent={{-30,-12.5},{-10,-17.5}},
+                  lineColor={0,0,255},
+                  lineThickness=1,
+                  textStyle={TextStyle.Bold},
+          textString="Low-Pressure
+Turbine A"),
+  Text(           extent={{65.5,17.5},{90.5,7.5}},
+                  lineColor={0,0,255},
+                  lineThickness=1,
+                  textStyle={TextStyle.Bold},
+                  textString="Generator and Grid"),Text(
+                  extent={{-10,0},{10,0}},
+                  lineColor={0,0,255},
+                  lineThickness=1,
+                  textStyle={TextStyle.Bold},
+          textString="Condenser with 
+Ratio Control",
+          origin={-15,-85},
+          rotation=90),
+        Text(
+          extent={{83,42.5},{103,43.5}},
+          lineColor={0,0,0},
+          textString="Sensor Bus"),
+        Text(
+          extent={{83,-44},{103,-43}},
+          lineColor={85,255,85},
+          textString="Actuator Bus"),
+  Text(           extent={{25,-12.5},{45,-17.5}},
+                  lineColor={0,0,255},
+                  lineThickness=1,
+                  textStyle={TextStyle.Bold},
+          textString="Low-Pressure
+Turbine B"),
+        Text(
+          extent={{-20,0},{20,0}},
+          lineColor={0,0,0},
+          origin={-65,70},
+          rotation=360,
+          textString="Main Steam from 3 Steam Generators",
+          horizontalAlignment=TextAlignment.Left),
+        Text(
+          extent={{-10,0},{10,-0.5}},
+          lineColor={0,0,0},
+          origin={-90,64.5},
+          rotation=360,
+          horizontalAlignment=TextAlignment.Left,
+          textString="Main Steam Header")}),
+    Icon(coordinateSystem(
+        preserveAspectRatio=false,
+        extent={{-175,-105},{175,105}},
+        grid={0.5,0.5}), graphics),
+    experiment(
+      StopTime=1000,
+      __Dymola_NumberOfIntervals=10000,
+      Tolerance=1e-006),
+    __Dymola_experimentSetupOutput);
+end PRISMFull;

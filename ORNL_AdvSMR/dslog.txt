@@ -1,0 +1,18 @@
+Model: ORNL_AdvSMR.Implementations.SmAHTR.PrimaryHeatTransportSystem.Tests.testSmAHTR_PHTS_noPD
+Integration started at 0 using integration method:
+cvode from sundials
+
+Integration terminated successfully at T = 1000
+   CPU time for integration                  : 0.102 seconds
+   Number of result points                   : 1001
+   Number of grid points                     : 1000
+   Number of (successful) steps              : 6
+   Number of rejected steps                  : 0
+   Number of F-evaluations                   : 10
+   Number of non-linear iteration            : 6
+   Number of non-linear convergence failures : 0
+   Number of Jacobian-evaluations            : 1
+   Number of crossing function evaluations   : 1006
+   Number of (model) time events             : 0
+   Number of state    events                 : 0
+   Number of step     events                 : 0

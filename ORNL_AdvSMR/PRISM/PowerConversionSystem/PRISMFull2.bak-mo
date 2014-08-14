@@ -1,0 +1,153 @@
+within ORNL_AdvSMR.PRISM.PowerConversionSystem;
+model PRISMFull2
+  import aSMR = ORNL_AdvSMR;
+
+  replaceable package PowerFluid = Modelica.Media.Water.StandardWater;
+
+  aSMR.Components.SteamTurbineStodola hpTurbine(
+    PRstart=20,
+    explicitIsentropicEnthalpy=true,
+    allowFlowReversal=false,
+    redeclare package Medium = PowerFluid,
+    wstart=506.9,
+    wnom=5506.9,
+    pnom=6653000,
+    Kt=0.025)
+    annotation (Placement(transformation(extent={{-80,-20},{-40,20}})));
+
+  inner ORNL_AdvSMR.System system(allowFlowReversal=false, Dynamics=ORNL_AdvSMR.Choices.System.Dynamics.FixedInitial)
+    annotation (Placement(transformation(extent={{120,60},{160,100}})));
+  ORNL_AdvSMR.PRISM.PowerConversionSystem.ElectricGeneratorGroup.Examples.SingleShaft_static
+    singleShaft_static(
+    Pn=5000e6,
+    eta=0.9,
+    J_shaft=100,
+    omega_nom=314.16/2,
+    SSInit=true)
+    annotation (Placement(transformation(extent={{80,-20},{120,20}})));
+  Modelica.Mechanics.Rotational.Sources.ConstantSpeed shaftSpeed(
+      w_fixed=314.16/2, useSupport=false) annotation (Placement(
+        transformation(extent={{-160,-20},{-120,20}},rotation=0)));
+  ORNL_AdvSMR.Components.TenStageLowPressureTurbine lpTurbine(
+    w_tap1=0,
+    w_tap2=0,
+    w_tap3=0,
+    PRstart=20,
+    redeclare package Medium = PowerFluid,
+    Kt=0.5,
+    pnom=1000000,
+    wnom=5506.9,
+    p_nom2=500000,
+    p_nom3=300000,
+    p_nom4=200000)
+    annotation (Placement(transformation(extent={{-20,-40},{60,40}})));
+  aSMR.Components.SensT Tsteam(redeclare package Medium = PowerFluid)
+                               annotation (Placement(transformation(
+        extent={{10,10},{-10,-10}},
+        rotation=90,
+        origin={-76,60})));
+  aSMR.Components.StateReader_water STflowRate(redeclare package Medium =
+        PowerFluid)                            annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-80,40})));
+  aSMR.Components.StateReader_water FWflowRate(redeclare package Medium =
+        PowerFluid)                            annotation (Placement(
+        transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=0,
+        origin={-30,-90})));
+  aSMR.Components.SourceW sourceW(
+    redeclare package Medium = PowerFluid,
+    w0=655.19,
+    p0=6653000,
+    h=1248.31e3)
+    annotation (Placement(transformation(extent={{-140,70},{-120,90}})));
+  aSMR.Components.SinkP sinkP(redeclare package Medium = PowerFluid)
+    annotation (Placement(transformation(extent={{-120,-100},{-140,-80}})));
+  aSMR.Interfaces.Sensors sensors
+    annotation (Placement(transformation(extent={{140,-40},{160,-20}})));
+  aSMR.Interfaces.Actuators actuators
+    annotation (Placement(transformation(extent={{140,-80},{160,-60}})));
+equation
+  connect(lpTurbine.shaft_b, singleShaft_static.shaft)
+    annotation (Line(
+      points={{60,0},{80,0}},
+      color={0,0,0},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(Tsteam.outlet, STflowRate.inlet) annotation (Line(
+      points={{-80,54},{-80,46}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=0.5));
+  connect(sourceW.flange, Tsteam.inlet) annotation (Line(
+      points={{-120,80},{-80,80},{-80,66}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=0.5));
+  connect(shaftSpeed.flange, hpTurbine.shaft_a) annotation (Line(
+      points={{-120,0},{-80,0}},
+      color={0,0,0},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(sinkP.flange, FWflowRate.outlet) annotation (Line(
+      points={{-120,-90},{-36,-90}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=0.5));
+  connect(hpTurbine.shaft_b, lpTurbine.shaft_a) annotation (Line(
+      points={{-40,0},{-20,0}},
+      color={0,0,0},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(sensors, singleShaft_static.SensorsBus) annotation (Line(
+      points={{150,-30},{132,-30},{132,-8},{120,-8}},
+      color={255,170,213},
+      smooth=Smooth.None), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(actuators, singleShaft_static.ActuatorsBus) annotation (Line(
+      points={{150,-70},{126,-70},{126,-14},{120,-14}},
+      color={213,255,170},
+      smooth=Smooth.None), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(lpTurbine.tap3, FWflowRate.inlet) annotation (Line(
+      points={{20,-18},{20,-90},{-24,-90}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=0.5));
+  connect(STflowRate.outlet, hpTurbine.inlet) annotation (Line(
+      points={{-80,34},{-80,20}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=0.5));
+  connect(hpTurbine.outlet, lpTurbine.turbineInlet) annotation (Line(
+      points={{-40,-20},{-40,-30},{-30,-30},{-30,40},{20,40},{20,20}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=0.5));
+  annotation (
+    Diagram(coordinateSystem(
+        preserveAspectRatio=false,
+        extent={{-160,-100},{160,100}},
+        grid={2,2}),     graphics={
+  Text(           extent={{123.5,33.5},{148.5,23.5}},
+                  lineColor={0,0,255},
+                  lineThickness=1,
+                  textStyle={TextStyle.Bold},
+                  textString="Generator and Grid")}),
+    Icon(coordinateSystem(
+        preserveAspectRatio=false,
+        extent={{-160,-100},{160,100}},
+        grid={2,2}),     graphics),
+    experiment(
+      StopTime=1000,
+      __Dymola_NumberOfIntervals=10000,
+      Tolerance=1e-006),
+    __Dymola_experimentSetupOutput);
+end PRISMFull2;

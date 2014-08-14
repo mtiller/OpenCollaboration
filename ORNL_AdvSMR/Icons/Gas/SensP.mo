@@ -1,0 +1,8 @@
+within ORNL_AdvSMR.Icons.Gas;
+model SensP
+
+  annotation (Icon(graphics={Line(points={{0,20},{0,-20}}, color={0,0,0}),
+          Ellipse(extent={{-40,100},{40,20}}, lineColor={0,0,0}),Line(points={{
+          40,60},{60,60}}),Text(extent={{-130,-80},{132,-124}}, textString=
+          "%name")}));
+end SensP;

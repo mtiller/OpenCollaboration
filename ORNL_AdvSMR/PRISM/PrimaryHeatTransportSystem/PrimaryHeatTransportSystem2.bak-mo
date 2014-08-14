@@ -1,0 +1,337 @@
+within ORNL_AdvSMR.PRISM.PrimaryHeatTransportSystem;
+model PrimaryHeatTransportSystem2
+
+  extends ORNL_AdvSMR.Interfaces.RxPrimaryHeatTransportSystem(redeclare package
+      PrimaryFluid = ORNL_AdvSMR.Media.Fluids.Na);
+
+  import Modelica.Constants.*;
+  import Modelica.SIunits.*;
+  import ORNL_AdvSMR.Choices.Flow1D.FFtypes;
+
+  /* General Parameters*/
+  parameter Power Q_nom=425e6 "Reactor nominal heat rating (W)" annotation (Dialog(tab="General"));
+  parameter Integer noRadialNodes_f=8 "Number of radial nodes for fuel" annotation (Dialog(tab="General"));
+  parameter Integer noRadialNodes_c=4 "Number of radial nodes for cladding" annotation (Dialog(tab="General"));
+  parameter Integer noAxialNodes=8 "Number of axial nodes" annotation (Dialog(tab="General"));
+  parameter Integer noFuelAssemblies=169 "Number of fuel assemblies" annotation (Dialog(tab="General", group="Core Loading Parameters"));
+  parameter Integer noFuelPinsPerAssembly=271
+    "Number of fuel pins in an assembly" annotation (Dialog(tab="General", group="Core Loading Parameters"));
+  final parameter Integer noFlowChannels=integer(noFuelAssemblies*noFuelPinsPerAssembly/(2*1.0419))
+    "Total number of fuel pins in the core" annotation (Dialog(tab="General", group="Core Loading Parameters"));
+  parameter Length H_fuelPin=5.04 "Active height of a fuel pin" annotation (Dialog(tab="General", group="Core Loading Parameters"));
+  parameter Boolean usePowerProfile=true "Use power profile output" annotation (Dialog(tab="General", group="Core Loading Parameters"));
+
+  /* Reactor kinetics parameters */
+  parameter Real[6] beta={0.000215,0.001424,0.001274,0.002568,0.000748,0.000273}
+    "Delayed neutron precursor fractions" annotation (Dialog(
+        tab="Reactor Kinetics", group="Neutron Kinetics Parameters"));
+  parameter Real[6] lambda(unit="1/s") = {0.0124,0.0305,0.111,0.301,1.14,3.01}
+    "Decay constants for each precursor group" annotation (Dialog(
+        tab="Reactor Kinetics", group="Neutron Kinetics Parameters"));
+  parameter Real Lambda(unit="s") = 0.03 "Mean neutron generation time" annotation (Dialog(tab="Reactor Kinetics", group=
+          "Neutron Kinetics Parameters"));
+  /* Reactivity feedback parameters */
+  parameter Real alpha_f=0.00 "Fuel Doppler feedback coefficient" annotation (Dialog(tab="Reactor Kinetics", group=
+          "Reactivity Feedback Parameters"));
+  parameter Temperature T_f0=773.15 "Fuel reference temperature" annotation (Dialog(tab="Reactor Kinetics", group=
+          "Reactivity Feedback Parameters"));
+  parameter Real alpha_c=0.00 "Coolant density feedback coefficient" annotation (Dialog(tab="Reactor Kinetics", group=
+          "Reactivity Feedback Parameters"));
+  parameter Temperature T_c0=673.15 "Coolant reference temperature" annotation (Dialog(tab="Reactor Kinetics", group=
+          "Reactivity Feedback Parameters"));
+  /* Fuel Cycle Parameters */
+  parameter Time T_op=360*24*3600 "Time since reactor startup" annotation (Dialog(tab="Reactor Kinetics", group="Fuel Cycle Parameters"));
+
+  /* CORE Coolant Channel Paramters */
+  parameter Boolean isTriangularPitch=true
+    "Check: Triangular pitch, Uncheck: Square pitch" annotation(Dialog(tab="CORE Coolant Channel", group="Flow Geometry", __Dymola_compact=true), choices(__Dymola_checkBox=true));
+  parameter Length P_bundle=8.8318e-3 "Bundle pitch (m)" annotation(Dialog(tab="CORE Coolant Channel", group="Flow Geometry"));
+  parameter Length D_fuelPin=5.4102e-3 "Fuel pin diameter (m)" annotation(Dialog(tab="CORE Coolant Channel", group="Flow Geometry"));
+  parameter Length H_coreChannel=5.04 "Channel height (m)" annotation(Dialog(tab="CORE Coolant Channel", group="Flow Geometry"));
+  parameter MassFlowRate w_nom=1126.4
+    "Nominal total mass flow rate through channels (kg/s)" annotation(Dialog(tab="CORE Coolant Channel", group="Flow Geometry"));
+  parameter FFtypes FFtype=Colebrook "Friction factor correlation" annotation(Evaluate=true, choicesAllMatching=true, Dialog(tab="CORE Coolant Channel", group="Flow Geometry"));
+  parameter Temperature T_coolIn = 592.15
+    "Primary coolant inlet temperature to core" annotation(Dialog(tab="CORE Coolant Channel", group="Coolant Medium"));
+  parameter Temperature T_coolOut = 741.15
+    "Primary coolant inlet temperature to core" annotation(Dialog(tab="CORE Coolant Channel", group="Coolant Medium"));
+  final parameter Area A_flow=if isTriangularPitch then sqrt(3)/4*P_bundle^2 - 1
+      /2*Modelica.Constants.pi*D_fuelPin^2/4 else P_bundle^2 - Modelica.Constants.pi
+      *D_fuelPin^2/4 "Channel flow area" annotation(Dialog(tab="CORE Coolant Channel", group="Flow Geometry"));
+  final parameter Length P_heated=if isTriangularPitch then 1/2*Modelica.Constants.pi
+      *D_fuelPin else Modelica.Constants.pi*D_fuelPin "Heated perimeter"  annotation(Dialog(tab="CORE Coolant Channel", group="Flow Geometry"), enable=false);
+  final parameter Length D_hyd=4*A_flow/P_heated "Hydraulic diameter" annotation(Dialog(tab="CORE Coolant Channel", group="Flow Geometry"));
+
+  /* Upper Plenum Parameters */
+  parameter Area A_upperPlenum=11.401
+    "Upper plenum liquid/gas interface area (m2)"                                   annotation(Dialog(tab="CORE Coolant Channel", group="Upper Plenum"));
+  parameter Volume V_upperPlenum=18.241 "Upper plenum volume (m3)" annotation(Dialog(tab="CORE Coolant Channel", group="Upper Plenum"));
+  parameter Temperature T_upperPlenum=741.15
+    "Upper plenum cover gas temperature (C)"                                          annotation(Dialog(tab="CORE Coolant Channel", group="Upper Plenum"));
+  parameter Pressure p_upperPlenum=1e5 "Upper plenum cover gas pressure (kPa)" annotation(Dialog(tab="CORE Coolant Channel", group="Upper Plenum"));
+
+/* Primary Heat Transport System Parameters */
+  parameter Integer N_pump=1 "Number of parallel pumps per loop" annotation(Dialog(tab="Primary Loop", group="Pump"));
+  parameter Integer rpm_nom=1400 "Nominal shaft rotational speed" annotation(Dialog(tab="Primary Loop", group="Pump"));
+  parameter Pressure p_nom(displayUnit="kPa")=1e5
+    "Pump nominal inlet pressure (bar)"                                               annotation(Dialog(tab="Primary Loop", group="Pump"));
+  parameter Volume V_pump=11.45 "Pump internal chamber volume (m3)" annotation(Dialog(tab="Primary Loop", group="Pump"));
+  parameter VolumeFlowRate[2] q_nom={1.2618, 2.5236}
+    "Nominal volumetric flow rate (m3/s)" annotation(Dialog(tab="Primary Loop", group="Pump"));
+  parameter Length head_nom[2]={9.8553, 7.8947} "Nominal pump head (m)" annotation(Dialog(tab="Primary Loop", group="Pump"));
+  final parameter Density rho_nom=PrimaryFluid.density_pT(p_upperPlenum, T_coolIn)
+    "Nominal coolant density in the pump (kg/m3)" annotation(Dialog(tab="Primary Loop", group="Pump"));
+
+  CORE.ReactorKinetics reactorKinetics(
+    noAxialNodes=noAxialNodes,
+    noFuelAssemblies=1,
+    noFuelPins=1,
+    Q_nom=Q_nom/(2*noFuelAssemblies*noFuelPinsPerAssembly),
+    alpha_f=alpha_f,
+    T_f0=T_f0,
+    alpha_c=alpha_c,
+    T_c0=T_c0)
+    annotation (Placement(transformation(extent={{-90,-15},{-60,15}})));
+
+  CORE.FuelPin fuelPin(noAxialNodes=noAxialNodes) annotation (Placement(
+        transformation(extent={{-51.5,-28},{-45.5,28}})));
+  Thermal.ConvHT_htc convection(N=noAxialNodes) annotation (Placement(
+        transformation(
+        extent={{-40,-7.5},{40,7.5}},
+        rotation=270,
+        origin={-37.5,0})));
+
+  Components.PipeFlow core(
+    Cfnom=0.0025,
+    FluidPhaseStart=ORNL_AdvSMR.Choices.FluidPhase.FluidPhases.Liquid,
+    use_HeatTransfer=true,
+    redeclare package Medium = PrimaryFluid,
+    avoidInletEnthalpyDerivative=false,
+    Kfnom=0.0025,
+    FFtype=FFtype,
+    redeclare model HeatTransfer =
+        ORNL_AdvSMR.BaseClasses.HeatTransfer.LocalPipeFlowHeatTransfer,
+    wnom=w_nom,
+    dpnom(displayUnit="kPa") = 27500,
+    rhonom=900,
+    hstartin=28.8858e3 + 1.2753e3*T_coolIn,
+    hstartout=28.8858e3 + 1.2753e3*T_coolOut,
+    initOpt=ORNL_AdvSMR.Choices.Init.Options.steadyState,
+    nNodes=noAxialNodes,
+    DynamicMomentum=true,
+    L=H_coreChannel,
+    H=H_coreChannel,
+    A=A_flow,
+    omega=P_heated,
+    Dhyd=D_hyd,
+    Nt=noFuelAssemblies*noFuelPinsPerAssembly,
+    pstart=100000,
+    redeclare Thermal.DHThtc wall) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-20,0})));
+  Components.Thermowell coreTo_thermowell(redeclare package Medium =
+        PrimaryFluid)                                                              annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-24,55})));
+
+  Modelica.Fluid.Fittings.Bends.CurvedBend coreOutTurn(redeclare package Medium
+      = PrimaryFluid, geometry(d_hyd=1.0, R_0=0.125)) annotation (Placement(transformation(
+        extent={{7.5,-7.5},{-7.5,7.5}},
+        rotation=180,
+        origin={-7.5,74.5})));
+
+  Components.SodiumExpansionTank upperPlenum(
+    redeclare package Medium = PrimaryFluid,
+    hstart=28.8858e3 + 1.2753e3*T_upperPlenum,
+    initOpt=ORNL_AdvSMR.Choices.Init.Options.noInit,
+    A=A_upperPlenum,
+    V0=V_upperPlenum,
+    ystart=(V_upperPlenum/A_upperPlenum)/2,
+    pext=p_upperPlenum)
+    annotation (Placement(transformation(extent={{10,70},{40,100}})));
+
+  Modelica.Fluid.Fittings.Bends.CurvedBend upOutTurn(redeclare package Medium
+      = PrimaryFluid, geometry(d_hyd=1.0, R_0=0.125))            annotation (Placement(transformation(
+        extent={{-7.5,7.5},{7.5,-7.5}},
+        rotation=270,
+        origin={75,62.5})));
+
+  Components.SensT dcTi(redeclare package Medium = PrimaryFluid) annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={79,31})));
+
+  Components.SensT dcTo(redeclare package Medium = PrimaryFluid) annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={94,-40})));
+
+  Modelica.Fluid.Fittings.Bends.CurvedBend ihxOutTurn(redeclare package Medium
+      = PrimaryFluid, geometry(d_hyd=1.0, R_0=0.125)) annotation (Placement(transformation(
+        extent={{7.5,-7.5},{-7.5,7.5}},
+        rotation=90,
+        origin={90,-67.5})));
+
+  Components.Pump primaryPump(
+    redeclare package Medium = PrimaryFluid,
+    rho0=rho_nom,
+    usePowerCharacteristic=false,
+    redeclare function efficiencyCharacteristic =
+        ORNL_AdvSMR.Functions.PumpCharacteristics.constantEfficiency (eta_nom=0.95),
+    n0=1400,
+    w0=w_nom,
+    hstart=28.8858e3 + 1.2753e3*T_coolIn,
+    wstart=w_nom,
+    initOpt=ORNL_AdvSMR.Choices.Init.Options.noInit,
+    V=V_pump,
+    redeclare function flowCharacteristic =
+        ORNL_AdvSMR.Functions.PumpCharacteristics.linearFlow (q_nom=q_nom,
+          head_nom=head_nom),
+    dp0(displayUnit="kPa") = 27500,
+    Np0=N_pump) annotation (Placement(
+        transformation(extent={{55,-97},{35,-77}}, rotation=0)));
+
+  Modelica.Fluid.Fittings.Bends.CurvedBend coreInTurn(redeclare package Medium
+      = PrimaryFluid, geometry(d_hyd=1.0, R_0=0.125))
+    annotation (Placement(transformation(
+        extent={{-7.5,7.5},{7.5,-7.5}},
+        rotation=180,
+        origin={-7.5,-80})));
+  Components.SensT coreTi(redeclare package Medium = PrimaryFluid) annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-24,-45})));
+
+  Modelica.Blocks.Interfaces.RealInput rho_CR annotation (Placement(
+        transformation(extent={{-115,-10},{-95,10}}), iconTransformation(
+          extent={{-110,65},{-90,85}})));
+
+  Components.SensT coreTo(redeclare package Medium = PrimaryFluid) annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-24,30})));
+
+equation
+  connect(dcTo.outlet, ihxOutTurn.port_a) annotation (Line(
+      points={{90,-46},{90,-60}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(coreTi.inlet, coreInTurn.port_b) annotation (Line(
+      points={{-20,-51},{-20,-80},{-15,-80}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(upOutTurn.port_b, dcTi.inlet) annotation (Line(
+      points={{75,55},{75,37}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(core.infl, coreTi.outlet) annotation (Line(
+      points={{-20,-10},{-20,-39}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(dcTi.outlet, primaryOut) annotation (Line(
+      points={{75,25},{75,15},{100,15}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(dcTo.inlet, primaryReturn) annotation (Line(
+      points={{90,-34},{90,-20},{100,-20}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(primaryOut, primaryOut) annotation (Line(
+      points={{100,15},{100,15.5},{99.5,15.5},{99.5,15},{100,15}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(fuelPin.wall, convection.otherside) annotation (Line(
+      points={{-44.75,-3.55271e-015},{-42,-3.55271e-015},{-42,
+          3.88578e-016},{-39.75,3.88578e-016}},
+      color={255,127,0},
+      smooth=Smooth.None));
+  connect(convection.fluidside, core.wall) annotation (Line(
+      points={{-35.25,0},{-30,0},{-30,-0.05},{-25,-0.05}},
+      color={255,127,0},
+      smooth=Smooth.None));
+  connect(reactorKinetics.axialProfile, fuelPin.powerIn) annotation (Line(
+      points={{-60,0},{-56.5,0},{-56.5,-3.55271e-015},{-53,-3.55271e-015}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(reactorKinetics.rho_CR, rho_CR) annotation (Line(
+      points={{-90,0},{-105,0}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(core.outfl, coreTo.inlet) annotation (Line(
+      points={{-20,10},{-20,24}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(coreTo.outlet, coreTo_thermowell.inlet) annotation (Line(
+      points={{-20,36},{-20,49}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  for i in 1:noAxialNodes loop
+    fuelPin.fp[i].T_cool = convection.fluidside.T[i];
+    fuelPin.fp[i].h = 1e4;
+  end for;
+  convection.fluidside.gamma = 1e4*ones(noAxialNodes);
+  reactorKinetics.T_ce = sum(core.T)/noAxialNodes;
+  reactorKinetics.T_fe = 500;
+
+  connect(coreInTurn.port_a, primaryPump.outfl) annotation (Line(
+      points={{0,-80},{39,-80}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(primaryPump.infl, ihxOutTurn.port_b) annotation (Line(
+      points={{53,-85},{90,-85},{90,-75}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(upperPlenum.outlet, upOutTurn.port_a) annotation (Line(
+      points={{35.5,74.5},{75,74.5},{75,70}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(coreOutTurn.port_b, upperPlenum.inlet) annotation (Line(
+      points={{0,74.5},{14.5,74.5}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  connect(coreOutTurn.port_a, coreTo_thermowell.outlet) annotation (Line(
+      points={{-15,74.5},{-20,74.5},{-20,61}},
+      color={0,127,255},
+      smooth=Smooth.None,
+      thickness=1));
+  annotation (__Dymola_Images(Parameters(tab="CORE Coolant Channel", group="Flow Geometry", source="C:/Users/mfc/SkyDrive/Documents/Icons/TriangularPitch.png")),
+    Diagram(coordinateSystem(
+        preserveAspectRatio=false,
+        extent={{-105,-100},{105,100}},
+        grid={0.5,0.5}), graphics),
+    Icon(coordinateSystem(
+        preserveAspectRatio=false,
+        extent={{-105,-100},{105,100}},
+        grid={0.5,0.5}), graphics={
+        Bitmap(extent={{-35,89.5},{44,-59.5}}, fileName="modelica://ORNL_AdvSMR/../Icons/PRISM reactor cutaway 660x450.png"),
+        Bitmap(
+          extent={{-73.75,46.25},{73.75,-46.25}},
+          origin={-61.75,15.25},
+          rotation=90,
+          fileName="modelica://ORNL_AdvSMR/../Icons/PRISM.png")}),
+    experiment(
+      StopTime=10000,
+      __Dymola_NumberOfIntervals=1000,
+      Tolerance=1e-006,
+      __Dymola_Algorithm="Dassl"),
+    __Dymola_experimentSetupOutput);
+end PrimaryHeatTransportSystem2;

@@ -1,0 +1,16 @@
+HeatExchanger_
+HelicalCoilSteamGenerator
+TestHCSG
+HeatExchangerFD
+HeatExchangerFD_incompressible
+hexFDTestModel
+HeatExchangerFEM
+hexFEMTestModel
+HXGas2Liquid_FEM
+heatExchanger
+HelicalCoilHeatExchanger
+HelicalCoilHeatExchangerWithDoubleWalledTubes
+IntermediateHeatExchanger
+testIHX_1w
+SteamGenerator
+testSG

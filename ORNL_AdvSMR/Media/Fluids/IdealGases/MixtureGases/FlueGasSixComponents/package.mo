@@ -1,0 +1,18 @@
+within ORNL_AdvSMR.Media.Fluids.IdealGases.MixtureGases;
+package FlueGasSixComponents "simplest flue gas for over-and understochiometric combustion of hydrocarbons"
+extends Common.MixtureGasNasa(
+  mediumName="FlueGasSixComponents",
+  data={Common.SingleGasesData.N2,Common.SingleGasesData.H2,Common.SingleGasesData.CO,
+      Common.SingleGasesData.O2,Common.SingleGasesData.H2O,Common.SingleGasesData.CO2},
+
+  fluidConstants={Common.FluidData.N2,Common.FluidData.H2,Common.FluidData.CO,
+      Common.FluidData.O2,Common.FluidData.H2O,Common.FluidData.CO2},
+  substanceNames={"Nitrogen","Hydrogen,","Carbonmonoxide","Oxygen","Water",
+      "Carbondioxide"},
+  reference_X={0.768,0.0,0.0,0.232,0.0,0.0});
+
+
+annotation (Documentation(info="<html>
+
+</html>"));
+end FlueGasSixComponents;

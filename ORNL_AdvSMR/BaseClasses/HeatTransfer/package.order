@@ -1,0 +1,12 @@
+PartialFlowHeatTransfer
+IdealFlowHeatTransfer
+ConstantFlowHeatTransfer
+PartialPipeFlowHeatTransfer
+LocalPipeFlowHeatTransfer
+PartialBundleHeatTransfer
+KazimiCarelli
+SchadModified
+GraberRieger
+Borishanskii
+CustomHeatTransfer1
+CustomHeatTransfer2

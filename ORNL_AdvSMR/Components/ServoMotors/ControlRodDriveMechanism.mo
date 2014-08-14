@@ -1,0 +1,3 @@
+within ORNL_AdvSMR.Components.ServoMotors;
+model ControlRodDriveMechanism
+end ControlRodDriveMechanism;

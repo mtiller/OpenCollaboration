@@ -1,0 +1,35 @@
+within ORNL_AdvSMR.Media.Alloys.Interfaces;
+partial model PartialMaterial
+  "Partial material properties (base model of all material models)"
+
+  import Modelica.SIunits.*;
+
+  // Constants to be set in Material
+  constant String materialName "Name of the material";
+  constant String materialDescription "Description of the material";
+  // Material properties depending on the material state
+  replaceable partial function density "Density as a function of temperature"
+    input Temperature T "Temperature (K)";
+    output Density rho "Density (kg/m3)";
+  end density;
+
+  replaceable partial function thermalConductivity
+    "Thermal conductivity as a function of temperature"
+    input Temperature T "Temperature (K)";
+    output ThermalConductivity k "Thermal conductivity (W/mK)";
+  end thermalConductivity;
+
+  replaceable partial function specificHeatCapacity
+    "Specific heat capacity as a function of temperature"
+    input Temperature T "Temperature (K)";
+    output SpecificHeatCapacity cp "Specific heat capacity (J/kgK)";
+  end specificHeatCapacity;
+
+  replaceable partial function linearExpansionCoefficient
+    "Linear expansion coefficient as a function of temperature"
+    input Temperature T "Temperature (K)";
+    output LinearExpansionCoefficient linearExpansionCoefficient
+      "Linear expansion coefficient of the material";
+  end linearExpansionCoefficient;
+
+end PartialMaterial;

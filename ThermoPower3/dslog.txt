@@ -1,0 +1,48 @@
+Log-file of program ./dymosim
+(generated: Tue Sep 10 11:33:20 2013)
+
+dymosim started
+... "dsin.txt" loading (dymosim input file)
+... "dsu.txt" loading (input signals u)
+
+... Warning message from dymosim
+The following model input signals are assumed to be zero during
+simulation, since file "dsu.txt" could not be opened
+(No such file or directory):
+   actuators.breakerClosed
+
+p > 611.657
+The following error was detected at time: 0
+IF97 medium function tsat called with too low pressure
+p = -1.47483e+006 Pa <= 611.657 Pa (triple point pressure)
+The stack of functions is:
+Modelica.Media.Water.IF97_Utilities.BaseIF97.Basic.tsat
+Modelica.Media.Water.IF97_Utilities.BaseIF97.Regions.boilingcurve_p
+Modelica.Media.Water.IF97_Utilities.BaseIF97.Regions.hl_p
+Modelica.Media.Water.IF97_Utilities.BaseIF97.Regions.region_ph
+Modelica.Media.Water.IF97_Utilities.waterBaseProp_ph
+Modelica.Media.Water.IF97_Utilities.waterBaseProp_ph(hpTurbine.steamState_in.p, sourceW.h, 0, 0)
+Non-linear solver will attempt to handle this problem.
+
+... "PRISMFull2.mat" creating (simulation result file)
+
+Integration started at T = 0 using integration method DASSL
+(DAE multi-step solver (dassl/dasslrt of Petzold modified by Dynasim))
+Integration terminated successfully at T = 1000
+   CPU-time for integration      : 0.116 seconds
+   CPU-time for one GRID interval: 0.0116 milli-seconds
+   Number of result points       : 10001
+   Number of GRID   points       : 10001
+   Number of (successful) steps  : 52
+   Number of F-evaluations       : 102
+   Number of H-evaluations       : 10052
+   Number of Jacobian-evaluations: 50
+   Number of (model) time events : 0
+   Number of (U) time events     : 0
+   Number of state    events     : 0
+   Number of step     events     : 0
+   Minimum integration stepsize  : 3.18e-013
+   Maximum integration stepsize  : 358
+   Maximum integration order     : 1
+Calling terminal section
+... "dsfinal.txt" creating (final states)

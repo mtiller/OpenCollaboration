@@ -1,0 +1,15 @@
+linear
+linear_der
+one
+one_der
+sqrtReg
+sqrtReg_der
+squareReg
+stepReg
+Pethukov
+SeiderTate
+OffsetController
+GandGfriction
+PumpCharacteristics
+ValveCharacteristics
+FanCharacteristics

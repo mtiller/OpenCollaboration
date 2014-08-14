@@ -1,0 +1,3051 @@
+#1
+char Aclass(3,24)
+Adymosim
+1.4
+Modelica experiment file
+
+# Experiment parameters
+double experiment(7,1)
+    1000                
+    2000                
+       0                
+    1000                
+ 9.9999999999999995E-007
+       0                
+      29                
+
+# Method parameters
+double method(27,1)
+       1                
+       1                
+       3                
+       1                
+       1                
+       0                
+       0                
+       0                
+       0                
+       0                
+       0                
+       0                
+       0                
+     100                
+       0                
+       0                
+       0                
+       0                
+       0                
+ 2.0000000000000000E-014
+ 1.0000000000000000E-010
+      20                
+ 9.9999999999999995E-007
+       1                
+       1                
+       1                
+    2473                
+
+# Input/output settings
+int settings(13,1)
+ 0
+ 1
+ 1
+ 1
+ 1
+ 0
+ 1
+ 1
+ 0
+ 0
+ 1
+ 0
+ 1
+
+# initialName
+char initialName(745,96)
+system.p_ambient
+system.T_ambient
+system.g
+system.Dynamics
+system.m_flow_start
+system.eps_m_flow
+system.dp_small
+system.m_flow_small
+SmAHTRDesignData.Q
+SmAHTRDesignData.noFuelAssemblies
+SmAHTRDesignData.noFuelPinsPerAssembly
+SmAHTRDesignData.PHTS_Core_CoolantChannel_width
+SmAHTRDesignData.PHTS_Core_CoolantChannel_depth
+Q_nom
+noRadialNodes_f
+noRadialNodes_c
+noFuelAssemblies
+noFuelPinsPerAssembly
+H_fuelPin
+usePowerProfile
+beta[1]
+beta[2]
+beta[3]
+beta[4]
+beta[5]
+beta[6]
+lambda[1]
+lambda[2]
+lambda[3]
+lambda[4]
+lambda[5]
+lambda[6]
+Lambda
+alpha_f
+T_f0
+alpha_c
+T_c0
+T_op
+isTriangularPitch
+P_bundle
+D_fuelPin
+H_coreChannel
+w_nom
+T_coolIn
+T_coolOut
+A_upperPlenum
+V_upperPlenum
+T_upperPlenum
+p_upperPlenum
+N_pump
+rpm_nom
+p_nom
+q_nom[1]
+q_nom[2]
+head_nom[1]
+head_nom[2]
+core.use_HeatTransfer
+core.A
+core.omega
+core.Dhyd
+core.PoD
+core.wnom
+core.Kfnom
+core.dpnom
+core.rhonom
+core.Cfnom
+core.e
+core.avoidInletEnthalpyDerivative
+core.FluidPhaseStart
+core.pstart
+core.hstartin
+core.hstartout
+core.wnf
+core.Kfc
+primaryPump.rho0
+primaryPump.n0
+primaryPump.wstart
+primaryPump.hstart
+primaryPump.w0
+primaryPump.dp0
+const.k
+spatialPlot.minX
+spatialPlot.maxX
+spatialPlot.minY
+spatialPlot.maxY
+spatialPlot.color[1]
+spatialPlot.color[2]
+spatialPlot.color[3]
+core1.use_HeatTransfer
+core1.A
+core1.omega
+core1.Dhyd
+core1.PoD
+core1.wnom
+core1.Kfnom
+core1.dpnom
+core1.rhonom
+core1.Cfnom
+core1.e
+core1.avoidInletEnthalpyDerivative
+core1.FluidPhaseStart
+core1.pstart
+core1.hstartin
+core1.hstartout
+core1.wnf
+core1.Kfc
+const1.k
+upperPlenum.hstart
+core.htilde[1]
+core.htilde[2]
+core.htilde[3]
+core.htilde[4]
+core.htilde[5]
+core.htilde[6]
+core.htilde[7]
+primaryPump.h
+core1.htilde[1]
+core1.htilde[2]
+core1.htilde[3]
+core1.htilde[4]
+core1.htilde[5]
+core1.htilde[6]
+core1.htilde[7]
+upperPlenum.y
+upperPlenum.h
+core.der(htilde[1])
+core.der(htilde[2])
+core.der(htilde[3])
+core.der(htilde[4])
+core.der(htilde[5])
+core.der(htilde[6])
+core.der(htilde[7])
+primaryPump.der(h)
+core1.der(htilde[1])
+core1.der(htilde[2])
+core1.der(htilde[3])
+core1.der(htilde[4])
+core1.der(htilde[5])
+core1.der(htilde[6])
+core1.der(htilde[7])
+upperPlenum.der(y)
+upperPlenum.der(h)
+system.allowFlowReversal
+system.energyDynamics
+system.massDynamics
+system.substanceDynamics
+system.traceDynamics
+system.momentumDynamics
+system.p_start
+system.T_start
+system.use_eps_Re
+system.m_flow_nominal
+_GlobalScope.ORNL_AdvSMR.Implementations.SmAHTR.SmAHTRDesignData.Q
+_GlobalScope.ORNL_AdvSMR.Implementations.SmAHTR.SmAHTRDesignData.noFuelAssemblies
+_GlobalScope.ORNL_AdvSMR.Implementations.SmAHTR.SmAHTRDesignData.noFuelPinsPerAssembly
+_GlobalScope.ORNL_AdvSMR.Implementations.SmAHTR.SmAHTRDesignData.PHTS_Core_CoolantChannel_width
+_GlobalScope.ORNL_AdvSMR.Implementations.SmAHTR.SmAHTRDesignData.PHTS_Core_CoolantChannel_depth
+_GlobalScope.ORNL_AdvSMR.Implementations.SmAHTR.SmAHTRDesignData.PHTS_Core_CoolantChannel_height
+SmAHTRDesignData.PHTS_Core_CoolantChannel_height
+noAxialNodes
+noFlowChannels
+FFtype
+A_flow
+P_heated
+D_hyd
+V_pump
+rho_nom
+convection.N
+convection.otherside.N
+convection.otherside.T[1]
+convection.otherside.T[2]
+convection.otherside.T[3]
+convection.otherside.T[4]
+convection.otherside.T[5]
+convection.otherside.T[6]
+convection.otherside.T[7]
+convection.otherside.T[8]
+convection.otherside.phi[1]
+convection.otherside.phi[2]
+convection.otherside.phi[3]
+convection.otherside.phi[4]
+convection.otherside.phi[5]
+convection.otherside.phi[6]
+convection.otherside.phi[7]
+convection.otherside.phi[8]
+convection.fluidside.N
+convection.fluidside.gamma[1]
+convection.fluidside.gamma[2]
+convection.fluidside.gamma[3]
+convection.fluidside.gamma[4]
+convection.fluidside.gamma[5]
+convection.fluidside.gamma[6]
+convection.fluidside.gamma[7]
+convection.fluidside.gamma[8]
+core.nNodes
+core.Nt
+core.L
+core.H
+core.FFtype
+core.DynamicMomentum
+core.HydraulicCapacitance
+core.allowFlowReversal
+core.hstart[1]
+core.hstart[2]
+core.hstart[3]
+core.hstart[4]
+core.hstart[5]
+core.hstart[6]
+core.hstart[7]
+core.hstart[8]
+core.initOpt
+core.g
+core.infl.m_flow
+core.infl.p
+core.outfl.m_flow
+core.wall.N
+core.wall.gamma[1]
+core.wall.gamma[2]
+core.wall.gamma[3]
+core.wall.gamma[4]
+core.wall.gamma[5]
+core.wall.gamma[6]
+core.wall.gamma[7]
+core.wall.gamma[8]
+core.Q
+core.Tr
+core.dzdx
+core.l
+core.fluidState[1].phase
+core.fluidState[1].h
+core.fluidState[1].d
+core.fluidState[1].T
+core.fluidState[1].p
+core.fluidState[2].phase
+core.fluidState[2].h
+core.fluidState[2].d
+core.fluidState[2].T
+core.fluidState[2].p
+core.fluidState[3].phase
+core.fluidState[3].h
+core.fluidState[3].d
+core.fluidState[3].T
+core.fluidState[3].p
+core.fluidState[4].phase
+core.fluidState[4].h
+core.fluidState[4].d
+core.fluidState[4].T
+core.fluidState[4].p
+core.fluidState[5].phase
+core.fluidState[5].h
+core.fluidState[5].d
+core.fluidState[5].T
+core.fluidState[5].p
+core.fluidState[6].phase
+core.fluidState[6].h
+core.fluidState[6].d
+core.fluidState[6].T
+core.fluidState[6].p
+core.fluidState[7].phase
+core.fluidState[7].h
+core.fluidState[7].d
+core.fluidState[7].T
+core.fluidState[7].p
+core.fluidState[8].phase
+core.fluidState[8].h
+core.fluidState[8].d
+core.fluidState[8].T
+core.fluidState[8].p
+core.omega_hyd
+core.Dpfric
+core.Dpfric1
+core.Dpfric2
+core.Dpstat
+core.win
+core.wout
+core.Kf
+core.dwdt
+core.Cf
+core.wbar[1]
+core.wbar[2]
+core.wbar[3]
+core.wbar[4]
+core.wbar[5]
+core.wbar[6]
+core.wbar[7]
+core.u[1]
+core.u[2]
+core.u[3]
+core.u[4]
+core.u[5]
+core.u[6]
+core.u[7]
+core.u[8]
+core.M
+core.dMdt[1]
+core.dMdt[2]
+core.dMdt[3]
+core.dMdt[4]
+core.dMdt[5]
+core.dMdt[6]
+core.dMdt[7]
+core.Qdot
+core.Qdot_actual
+core.mu[1]
+core.mu[2]
+core.mu[3]
+core.mu[4]
+core.mu[5]
+core.mu[6]
+core.mu[7]
+core.mu[8]
+core.Re[1]
+core.Re[2]
+core.Re[3]
+core.Re[4]
+core.Re[5]
+core.Re[6]
+core.Re[7]
+core.Re[8]
+core.Pr[1]
+core.Pr[2]
+core.Pr[3]
+core.Pr[4]
+core.Pr[5]
+core.Pr[6]
+core.Pr[7]
+core.Pr[8]
+core.Pe[1]
+core.Pe[2]
+core.Pe[3]
+core.Pe[4]
+core.Pe[5]
+core.Pe[6]
+core.Pe[7]
+core.Pe[8]
+core.Nu[1]
+core.Nu[2]
+core.Nu[3]
+core.Nu[4]
+core.Nu[5]
+core.Nu[6]
+core.Nu[7]
+core.Nu[8]
+core.h_conv[1]
+core.h_conv[2]
+core.h_conv[3]
+core.h_conv[4]
+core.h_conv[5]
+core.h_conv[6]
+core.h_conv[7]
+core.h_conv[8]
+core.rhobar[1]
+core.rhobar[2]
+core.rhobar[3]
+core.rhobar[4]
+core.rhobar[5]
+core.rhobar[6]
+core.rhobar[7]
+core.vbar[1]
+core.vbar[2]
+core.vbar[3]
+core.vbar[4]
+core.vbar[5]
+core.vbar[6]
+core.vbar[7]
+core.phibar[1]
+core.phibar[2]
+core.phibar[3]
+core.phibar[4]
+core.phibar[5]
+core.phibar[6]
+core.phibar[7]
+core.drdh[1]
+core.drdh[2]
+core.drdh[3]
+core.drdh[4]
+core.drdh[5]
+core.drdh[6]
+core.drdh[7]
+core.drdh[8]
+core.drbdh[1]
+core.drbdh[2]
+core.drbdh[3]
+core.drbdh[4]
+core.drbdh[5]
+core.drbdh[6]
+core.drbdh[7]
+core.drdp[1]
+core.drdp[2]
+core.drdp[3]
+core.drdp[4]
+core.drdp[5]
+core.drdp[6]
+core.drdp[7]
+core.drdp[8]
+core.drbdp[1]
+core.drbdp[2]
+core.drbdp[3]
+core.drbdp[4]
+core.drbdp[5]
+core.drbdp[6]
+core.drbdp[7]
+primaryPump.inletFluidState.phase
+primaryPump.inletFluidState.h
+primaryPump.inletFluidState.d
+primaryPump.inletFluidState.T
+primaryPump.usePowerCharacteristic
+primaryPump.Np0
+primaryPump.V
+primaryPump.CheckValve
+primaryPump.allowFlowReversal
+primaryPump.initOpt
+primaryPump.g
+primaryPump.q_single0
+primaryPump.head0
+primaryPump.w_single
+primaryPump.q_single
+primaryPump.q
+primaryPump.dp
+primaryPump.head
+primaryPump.W_single
+primaryPump.W
+primaryPump.W_eps
+primaryPump.n_eps
+primaryPump.eta
+primaryPump.n_const
+PHTS_Rx_Tin.allowFlowReversal
+PHTS_Rx_Tin.h
+PHTS_Rx_Tin.fluidState.phase
+PHTS_Rx_Tin.fluidState.d
+PHTS_Rx_Tin.fluidState.T
+PHTS_Rx_Tout.allowFlowReversal
+PHTS_Rx_Tout.h
+PHTS_Rx_Tout.fluidState.phase
+PHTS_Rx_Tout.fluidState.d
+PHTS_Rx_Tout.fluidState.T
+spatialPlot.x[1]
+spatialPlot.x[2]
+spatialPlot.x[3]
+spatialPlot.x[4]
+spatialPlot.x[5]
+spatialPlot.x[6]
+spatialPlot.x[7]
+spatialPlot.x[8]
+spatialPlot.PolyLine1.x[1]
+spatialPlot.PolyLine1.x[2]
+spatialPlot.PolyLine1.x[3]
+spatialPlot.PolyLine1.x[4]
+spatialPlot.PolyLine1.x[5]
+spatialPlot.PolyLine1.x[6]
+spatialPlot.PolyLine1.x[7]
+spatialPlot.PolyLine1.x[8]
+spatialPlot.PolyLine1.color[1]
+spatialPlot.PolyLine1.color[2]
+spatialPlot.PolyLine1.color[3]
+spatialPlot.PolyLine1.minX
+spatialPlot.PolyLine1.maxX
+spatialPlot.PolyLine1.minY
+spatialPlot.PolyLine1.maxY
+spatialPlot.PolyLine1.scaledX[1]
+spatialPlot.PolyLine1.scaledX[2]
+spatialPlot.PolyLine1.scaledX[3]
+spatialPlot.PolyLine1.scaledX[4]
+spatialPlot.PolyLine1.scaledX[5]
+spatialPlot.PolyLine1.scaledX[6]
+spatialPlot.PolyLine1.scaledX[7]
+spatialPlot.PolyLine1.scaledX[8]
+spatialPlot.PolyLine1.unScaledX[1]
+spatialPlot.PolyLine1.unScaledX[2]
+spatialPlot.PolyLine1.unScaledX[3]
+spatialPlot.PolyLine1.unScaledX[4]
+spatialPlot.PolyLine1.unScaledX[5]
+spatialPlot.PolyLine1.unScaledX[6]
+spatialPlot.PolyLine1.unScaledX[7]
+spatialPlot.PolyLine1.unScaledX[8]
+spatialPlot.PolyLine1.unScaledY[1]
+spatialPlot.PolyLine1.unScaledY[2]
+spatialPlot.PolyLine1.unScaledY[3]
+spatialPlot.PolyLine1.unScaledY[4]
+spatialPlot.PolyLine1.unScaledY[5]
+spatialPlot.PolyLine1.unScaledY[6]
+spatialPlot.PolyLine1.unScaledY[7]
+spatialPlot.PolyLine1.unScaledY[8]
+heatSource1D.N
+heatSource1D.Nt
+heatSource1D.L
+heatSource1D.omega
+heatSource1D.wall.N
+core1.nNodes
+core1.Nt
+core1.L
+core1.H
+core1.FFtype
+core1.DynamicMomentum
+core1.HydraulicCapacitance
+core1.allowFlowReversal
+core1.hstart[1]
+core1.hstart[2]
+core1.hstart[3]
+core1.hstart[4]
+core1.hstart[5]
+core1.hstart[6]
+core1.hstart[7]
+core1.hstart[8]
+core1.initOpt
+core1.g
+core1.infl.m_flow
+core1.wall.N
+core1.wall.phi[1]
+core1.wall.phi[2]
+core1.wall.phi[3]
+core1.wall.phi[4]
+core1.wall.phi[5]
+core1.wall.phi[6]
+core1.wall.phi[7]
+core1.wall.phi[8]
+core1.wall.gamma[1]
+core1.wall.gamma[2]
+core1.wall.gamma[3]
+core1.wall.gamma[4]
+core1.wall.gamma[5]
+core1.wall.gamma[6]
+core1.wall.gamma[7]
+core1.wall.gamma[8]
+core1.Q
+core1.Tr
+core1.dzdx
+core1.l
+core1.fluidState[1].phase
+core1.fluidState[1].h
+core1.fluidState[1].d
+core1.fluidState[1].T
+core1.fluidState[1].p
+core1.fluidState[2].phase
+core1.fluidState[2].h
+core1.fluidState[2].d
+core1.fluidState[2].T
+core1.fluidState[2].p
+core1.fluidState[3].phase
+core1.fluidState[3].h
+core1.fluidState[3].d
+core1.fluidState[3].T
+core1.fluidState[3].p
+core1.fluidState[4].phase
+core1.fluidState[4].h
+core1.fluidState[4].d
+core1.fluidState[4].T
+core1.fluidState[4].p
+core1.fluidState[5].phase
+core1.fluidState[5].h
+core1.fluidState[5].d
+core1.fluidState[5].T
+core1.fluidState[5].p
+core1.fluidState[6].phase
+core1.fluidState[6].h
+core1.fluidState[6].d
+core1.fluidState[6].T
+core1.fluidState[6].p
+core1.fluidState[7].phase
+core1.fluidState[7].h
+core1.fluidState[7].d
+core1.fluidState[7].T
+core1.fluidState[7].p
+core1.fluidState[8].phase
+core1.fluidState[8].h
+core1.fluidState[8].d
+core1.fluidState[8].T
+core1.fluidState[8].p
+core1.omega_hyd
+core1.Dpfric
+core1.Dpfric1
+core1.Dpfric2
+core1.Dpstat
+core1.win
+core1.wout
+core1.Kf
+core1.dwdt
+core1.Cf
+core1.wbar[1]
+core1.wbar[2]
+core1.wbar[3]
+core1.wbar[4]
+core1.wbar[5]
+core1.wbar[6]
+core1.wbar[7]
+core1.u[1]
+core1.u[2]
+core1.u[3]
+core1.u[4]
+core1.u[5]
+core1.u[6]
+core1.u[7]
+core1.u[8]
+core1.M
+core1.dMdt[1]
+core1.dMdt[2]
+core1.dMdt[3]
+core1.dMdt[4]
+core1.dMdt[5]
+core1.dMdt[6]
+core1.dMdt[7]
+core1.Qdot
+core1.Qdot_actual
+core1.mu[1]
+core1.mu[2]
+core1.mu[3]
+core1.mu[4]
+core1.mu[5]
+core1.mu[6]
+core1.mu[7]
+core1.mu[8]
+core1.Re[1]
+core1.Re[2]
+core1.Re[3]
+core1.Re[4]
+core1.Re[5]
+core1.Re[6]
+core1.Re[7]
+core1.Re[8]
+core1.Pr[1]
+core1.Pr[2]
+core1.Pr[3]
+core1.Pr[4]
+core1.Pr[5]
+core1.Pr[6]
+core1.Pr[7]
+core1.Pr[8]
+core1.Pe[1]
+core1.Pe[2]
+core1.Pe[3]
+core1.Pe[4]
+core1.Pe[5]
+core1.Pe[6]
+core1.Pe[7]
+core1.Pe[8]
+core1.Nu[1]
+core1.Nu[2]
+core1.Nu[3]
+core1.Nu[4]
+core1.Nu[5]
+core1.Nu[6]
+core1.Nu[7]
+core1.Nu[8]
+core1.h_conv[1]
+core1.h_conv[2]
+core1.h_conv[3]
+core1.h_conv[4]
+core1.h_conv[5]
+core1.h_conv[6]
+core1.h_conv[7]
+core1.h_conv[8]
+core1.rhobar[1]
+core1.rhobar[2]
+core1.rhobar[3]
+core1.rhobar[4]
+core1.rhobar[5]
+core1.rhobar[6]
+core1.rhobar[7]
+core1.vbar[1]
+core1.vbar[2]
+core1.vbar[3]
+core1.vbar[4]
+core1.vbar[5]
+core1.vbar[6]
+core1.vbar[7]
+core1.phibar[1]
+core1.phibar[2]
+core1.phibar[3]
+core1.phibar[4]
+core1.phibar[5]
+core1.phibar[6]
+core1.phibar[7]
+core1.drdh[1]
+core1.drdh[2]
+core1.drdh[3]
+core1.drdh[4]
+core1.drdh[5]
+core1.drdh[6]
+core1.drdh[7]
+core1.drdh[8]
+core1.drbdh[1]
+core1.drbdh[2]
+core1.drbdh[3]
+core1.drbdh[4]
+core1.drbdh[5]
+core1.drbdh[6]
+core1.drbdh[7]
+core1.drdp[1]
+core1.drdp[2]
+core1.drdp[3]
+core1.drdp[4]
+core1.drdp[5]
+core1.drdp[6]
+core1.drdp[7]
+core1.drdp[8]
+core1.drbdp[1]
+core1.drbdp[2]
+core1.drbdp[3]
+core1.drbdp[4]
+core1.drbdp[5]
+core1.drbdp[6]
+core1.drbdp[7]
+convection1.N
+convection1.otherside.N
+convection1.otherside.T[1]
+convection1.otherside.T[2]
+convection1.otherside.T[3]
+convection1.otherside.T[4]
+convection1.otherside.T[5]
+convection1.otherside.T[6]
+convection1.otherside.T[7]
+convection1.otherside.T[8]
+convection1.fluidside.N
+convection1.fluidside.gamma[1]
+convection1.fluidside.gamma[2]
+convection1.fluidside.gamma[3]
+convection1.fluidside.gamma[4]
+convection1.fluidside.gamma[5]
+convection1.fluidside.gamma[6]
+convection1.fluidside.gamma[7]
+convection1.fluidside.gamma[8]
+heatSource1D1.N
+heatSource1D1.Nt
+heatSource1D1.L
+heatSource1D1.omega
+heatSource1D1.wall.N
+upperPlenum.liquidState.phase
+upperPlenum.liquidState.d
+upperPlenum.liquidState.der(d)
+upperPlenum.liquidState.T
+upperPlenum.A
+upperPlenum.V0
+upperPlenum.pext
+upperPlenum.allowFlowReversal
+upperPlenum.ystart
+upperPlenum.initOpt
+upperPlenum.V
+upperPlenum.der(V)
+upperPlenum.M
+upperPlenum.der(M)
+upperPlenum.H
+upperPlenum.der(H)
+upperPlenum.hin
+upperPlenum.hout
+upperPlenum.g
+
+# initialValue
+double initialValue(745,6)
+ -2 1.0132500000000000E+005       0                 1.0000000000000000E+100
+  1   280
+ -2 2.9314999999999998E+002       0                 1.0000000000000000E+100
+  1   280
+ -2 9.8066499999999994E+000       0                       0                
+  1   280
+ -2       1                       1                       4                
+  1   282
+ -2       0                       0                       0                
+  1   280
+ -2 1.0000000000000000E-004       0                 1.0000000000000000E+100
+  1   280
+ -2       1                       0                 1.0000000000000000E+100
+  1   280
+ -2 1.0000000000000000E-002       0                 1.0000000000000000E+100
+  1   280
+ -2 1.2500000000000000E+008       0                       0                
+  1   280
+ -2      19                       0                       0                
+  1   282
+ -2      15                       0                       0                
+  1   282
+ -2 2.3899999999999999E-001       0                       0                
+  1   280
+ -2 7.0000000000000001E-003       0                       0                
+  1   280
+ -2 4.2500000000000000E+008       0                       0                
+  1   280
+ -2       8                       0                       0                
+  1   282
+ -2       4                       0                       0                
+  1   282
+ -2     169                       0                       0                
+  1   282
+ -2     271                       0                       0                
+  1   282
+ -2 1.1938000000000000E+000       0                       0                
+  1   280
+ -2       1                       0                       0                
+  1   281
+ -2 2.1499999999999999E-004       0                       0                
+  1   280
+ -2 1.4239999999999999E-003       0                       0                
+  1   280
+ -2 1.2740000000000000E-003       0                       0                
+  1   280
+ -2 2.5680000000000000E-003       0                       0                
+  1   280
+ -2 7.4799999999999997E-004       0                       0                
+  1   280
+ -2 2.7300000000000002E-004       0                       0                
+  1   280
+ -2 1.2400000000000000E-002       0                       0                
+  1   280
+ -2 3.0499999999999999E-002       0                       0                
+  1   280
+ -2 1.1100000000000000E-001       0                       0                
+  1   280
+ -2 3.0099999999999999E-001       0                       0                
+  1   280
+ -2 1.1399999999999999E+000       0                       0                
+  1   280
+ -2 3.0099999999999998E+000       0                       0                
+  1   280
+ -2 2.9999999999999999E-002       0                       0                
+  1   280
+ -2       0                       0                       0                
+  1   280
+ -2 7.7314999999999998E+002       0                 1.0000000000000000E+100
+  1   280
+ -2       0                       0                       0                
+  1   280
+ -2 6.7314999999999998E+002       0                 1.0000000000000000E+100
+  1   280
+ -2 3.1104000000000000E+007       0                       0                
+  1   280
+ -2       1                       0                       0                
+  1   281
+ -2 8.8318000000000008E-003       0                       0                
+  1   280
+ -2 7.3660000000000002E-003       0                       0                
+  1   280
+ -2 1.1938000000000000E+000       0                       0                
+  1   280
+ -2 1.1264000000000001E+003       0                       0                
+  1   280
+ -2 5.9214999999999998E+002       0                 1.0000000000000000E+100
+  1   280
+ -2 7.4114999999999998E+002       0                 1.0000000000000000E+100
+  1   280
+ -2 1.1401000000000000E+001       0                       0                
+  1   280
+ -2 1.8241000000000000E+001       0                       0                
+  1   280
+ -2 7.4114999999999998E+002       0                 1.0000000000000000E+100
+  1   280
+ -2  100000                       0                       0                
+  1   280
+ -2       1                       0                       0                
+  1   282
+ -2    1400                       0                       0                
+  1   282
+ -2  100000                       0                       0                
+  1   280
+ -2 6.2300000000000001E-002       0                       0                
+  1   280
+ -2 6.2300000000000004E+000       0                       0                
+  1   280
+ -2 7.4999999999999997E-002       0                       0                
+  1   280
+ -2 1.2500000000000000E+000       0                       0                
+  1   280
+ -2       1                       0                       0                
+  1   281
+ -2 1.5191000000000000E-003       0                       0                
+  1   280
+ -2 5.0797999999999999E-001       0                       0                
+  1   280
+ -2 1.1962000000000000E-002       0                       0                
+  1   280
+ -2 1.1899999999999999E+000       0                       0                
+  1   280
+ -2    1325                       0                       0                
+  1   280
+ -2 2.5000000000000001E-003       0                 1.0000000000000000E+100
+  1   280
+ -2   15000                       0                       0                
+  1   280
+ -2    2000                       0                 1.0000000000000000E+100
+  1   280
+ -2 2.5000000000000001E-003       0                       0                
+  1   280
+ -2       0                       0                       0                
+  1   280
+ -2       1                       0                       0                
+  1   281
+ -2       1                       1                       3                
+  1   282
+ -2  100000                       0                       0                
+  1   280
+ -2 1.4280000000000000E+006       0                       0                
+  1   280
+ -2 1.5470000000000000E+006       0                       0                
+  1   280
+ -2 2.0000000000000000E-002       0                       0                
+  1   280
+ -2       1                       0                       0                
+  1   280
+ -2    2000                       0                 1.0000000000000000E+100
+  1   280
+ -2    1000                       0                       0                
+  1   280
+ -2    1325                       0                       0                
+  1   280
+ -2 1.4280000000000000E+006       0                       0                
+  1   280
+ -2    1325                       0                       0                
+  1   280
+ -2   30000                       0                       0                
+  1   280
+ -2       0                       0                       0                
+  1   280
+ -2       1                       0                       0                
+  1   280
+ -2       8                       0                       0                
+  1   280
+ -2     400                       0                       0                
+  1   280
+ -2     800                       0                       0                
+  1   280
+ -2     255                       0                     255                
+  1   282
+ -2       0                       0                     255                
+  1   282
+ -2       0                       0                     255                
+  1   282
+ -2       1                       0                       0                
+  1   281
+ -2 1.5191000000000000E-003       0                       0                
+  1   280
+ -2 5.0797999999999999E-001       0                       0                
+  1   280
+ -2 1.1962000000000000E-002       0                       0                
+  1   280
+ -2 1.1899999999999999E+000       0                       0                
+  1   280
+ -2    1325                       0                       0                
+  1   280
+ -2 2.5000000000000001E-003       0                 1.0000000000000000E+100
+  1   280
+ -2   15000                       0                       0                
+  1   280
+ -2    2000                       0                 1.0000000000000000E+100
+  1   280
+ -2 2.5000000000000001E-003       0                       0                
+  1   280
+ -2       0                       0                       0                
+  1   280
+ -2       1                       0                       0                
+  1   281
+ -2       1                       1                       3                
+  1   282
+ -2  100000                       0                       0                
+  1   280
+ -2 1.5470000000000000E+006       0                       0                
+  1   280
+ -2 1.4280000000000000E+006       0                       0                
+  1   280
+ -2 2.0000000000000000E-002       0                       0                
+  1   280
+ -2       1                       0                       0                
+  1   280
+ -2       0                       0                       0                
+  1   280
+ -2 1.5470000000000000E+006       0                       0                
+  1   280
+ -2 1.2660819853921393E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 1.2660819853921395E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 1.2660819853921395E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 1.2660819853921393E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 1.2660819853921388E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 1.2660819853921381E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 1.2660819853921367E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 1.2660819853921395E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 1.2660819853977936E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 1.2660819853977938E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 1.2660819853977936E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 1.2660819853977936E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 1.2660819853977938E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 1.2660819853977941E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 1.2660819853977947E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 7.9997368651871792E-001       0                       0                
+  2   272
+ -2 1.2660819853977938E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  2   272
+ -2 -1.6582308929120911E-010       0                       0                
+  3   256
+ -2 1.6582308929120911E-010       0                       0                
+  3   256
+ -2       0                       0                       0                
+  3   256
+ -2 -1.6582308929120911E-010       0                       0                
+  3   256
+ -2 -3.3164617858241822E-010       0                       0                
+  3   256
+ -2 -4.9746926787362718E-010       0                       0                
+  3   256
+ -2 -9.9493853574725477E-010       0                       0                
+  3   256
+ -2 8.9852640002610538E-012       0                       0                
+  3   256
+ -2 -1.6582308929129845E-010       0                       0                
+  3   256
+ -2 1.6582308929129845E-010       0                       0                
+  3   256
+ -2 -1.6582308929129845E-010       0                       0                
+  3   256
+ -2 7.6486747791425121E-043       0                       0                
+  3   256
+ -2 1.6582308929129845E-010       0                       0                
+  3   256
+ -2 1.6582308929129845E-010       0                       0                
+  3   256
+ -2 4.9746926787389539E-010       0                       0                
+  3   256
+ -2 -5.4604350855781914E-018       0                       0                
+  3   256
+ -2 -3.6270623960363390E-012       0                       0                
+  3   256
+ -2       1                       0                       0                
+  6   257
+ -2       1                       1                       4                
+  6   258
+ -2       1                       1                       4                
+  6   258
+ -2       1                       1                       4                
+  6   258
+ -2       1                       1                       4                
+  6   258
+ -2       4                       1                       4                
+  6   258
+ -2 1.0132500000000000E+005       0                 1.0000000000000000E+100
+  6   256
+ -2 2.9314999999999998E+002       0                 1.0000000000000000E+100
+  6   256
+ -2       0                       0                       0                
+  6   257
+ -2       1                       0                       0                
+  6   256
+ -2 1.2500000000000000E+008       0                       0                
+  6  1280
+ -2      19                       0                       0                
+  6  1282
+ -2      15                       0                       0                
+  6  1282
+ -2 2.3899999999999999E-001       0                       0                
+  6  1280
+ -2 7.0000000000000001E-003       0                       0                
+  6  1280
+ -2       4                       0                       0                
+  6  1280
+ -2       4                       0                       0                
+  6   256
+ -2       8                       0                       0                
+  6   258
+ -2   22899                       0                       0                
+  6   258
+ -2       4                       1                       5                
+  6   258
+ -2 1.2468240567243389E-005       0                       0                
+  6   256
+ -2 1.1570485743171209E-002       0                       0                
+  6   256
+ -2 4.3103602887552151E-003       0                       0                
+  6   256
+ -2 1.1449999999999999E+001       0                       0                
+  6   256
+ -2 2.4131100000000001E+003       0                 1.0000000000000000E+100
+  6   256
+ -2       8                       0                       0                
+  6   258
+ -2       8                       1                 1.0000000000000000E+100
+  6   262
+ -2 5.3196722075299988E+002       0                 1.0000000000000000E+100
+  6   260
+ -2 5.3196722075299976E+002       0                 1.0000000000000000E+100
+  6   260
+ -2 5.3196722075299988E+002       0                 1.0000000000000000E+100
+  6   260
+ -2 5.3196722075299988E+002       0                 1.0000000000000000E+100
+  6   260
+ -2 5.3196722075299976E+002       0                 1.0000000000000000E+100
+  6   260
+ -2 5.3196722075299954E+002       0                 1.0000000000000000E+100
+  6   260
+ -2 5.3196722075299920E+002       0                 1.0000000000000000E+100
+  6   260
+ -2 5.3196722075299863E+002       0                 1.0000000000000000E+100
+  6   260
+ -2       0                       0                       0                
+  6   388
+ -2       0                       0                       0                
+  6   388
+ -2       0                       0                       0                
+  6   388
+ -2       0                       0                       0                
+  6   388
+ -2       0                       0                       0                
+  6   388
+ -2       0                       0                       0                
+  6   388
+ -2       0                       0                       0                
+  6   388
+ -2       0                       0                       0                
+  6   388
+ -2       8                       1                 1.0000000000000000E+100
+  6   262
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2       8                       2                 1.0000000000000000E+100
+  6   258
+ -2     570                       0                       0                
+  6   258
+ -2       4                       0                 1.0000000000000000E+100
+  6   256
+ -2       4                       0                       0                
+  6   256
+ -2       5                       1                       5                
+  6   258
+ -2       0                       0                       0                
+  6   257
+ -2       3                       1                       3                
+  6   258
+ -2       1                       0                       0                
+  6   257
+ -2 1.4280000000000000E+006       0                       0                
+  6   256
+ -2 1.4450000000000000E+006       0                       0                
+  6   256
+ -2 1.4620000000000000E+006       0                       0                
+  6   256
+ -2 1.4790000000000000E+006       0                       0                
+  6   256
+ -2 1.4960000000000000E+006       0                       0                
+  6   256
+ -2 1.5130000000000000E+006       0                       0                
+  6   256
+ -2 1.5300000000000000E+006       0                       0                
+  6   256
+ -2 1.5470000000000000E+006       0                       0                
+  6   256
+ -2       2                       1                       5                
+  6   258
+ -2 9.8066499999999994E+000       0                       0                
+  6   256
+ -2 -7.5880819289553870E+002 -9.9999999999999995E+059  100000                
+  6   388
+ -2 2.0135927832424594E+005       0                 1.0000000000000000E+008
+  6   260
+ -2 7.5880819289553892E+002 -100000                 9.9999999999999995E+059
+  6   388
+ -2       8                       1                 1.0000000000000000E+100
+  6   262
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2       0                       0                       0                
+  6   256
+ -2 1.3084295163102364E+016       0                       0                
+  6   256
+ -2       1                       0                       0                
+  6   256
+ -2 5.7142857142857140E-001       0                       0                
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853921395E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093842350E+003       0                  100000                
+  6   256
+ -2 5.3196722075299988E+002       1                   10000                
+  6   256
+ -2 1.1689275001061428E+005       0                 1.0000000000000000E+008
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853921393E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093842350E+003       0                  100000                
+  6   256
+ -2 5.3196722075299976E+002       1                   10000                
+  6   256
+ -2 1.1689275001061428E+005       0                 1.0000000000000000E+008
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853921395E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093842350E+003       0                  100000                
+  6   256
+ -2 5.3196722075299988E+002       1                   10000                
+  6   256
+ -2 1.1689275001061428E+005       0                 1.0000000000000000E+008
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853921395E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093842350E+003       0                  100000                
+  6   256
+ -2 5.3196722075299988E+002       1                   10000                
+  6   256
+ -2 1.1689275001061428E+005       0                 1.0000000000000000E+008
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853921393E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093842350E+003       0                  100000                
+  6   256
+ -2 5.3196722075299976E+002       1                   10000                
+  6   256
+ -2 1.1689275001061428E+005       0                 1.0000000000000000E+008
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853921388E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093842350E+003       0                  100000                
+  6   256
+ -2 5.3196722075299954E+002       1                   10000                
+  6   256
+ -2 1.1689275001061428E+005       0                 1.0000000000000000E+008
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853921381E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093842354E+003       0                  100000                
+  6   256
+ -2 5.3196722075299920E+002       1                   10000                
+  6   256
+ -2 1.1689275001061428E+005       0                 1.0000000000000000E+008
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853921367E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093842354E+003       0                  100000                
+  6   256
+ -2 5.3196722075299863E+002       1                   10000                
+  6   256
+ -2 1.1689275001061428E+005       0                 1.0000000000000000E+008
+  6   256
+ -2 5.0797525497408458E-001       0                       0                
+  6   256
+ -2       0                       0                       0                
+  6   256
+ -2       0                       0                       0                
+  6   256
+ -2       0                       0                       0                
+  6   256
+ -2 8.4466528313631643E+004       0                       0                
+  6   256
+ -2 -1.3312424436763837E+000       0                       0                
+  6   256
+ -2 -1.3312424436763841E+000       0                       0                
+  6   256
+ -2       0                       0                       0                
+  6   256
+ -2       0                       0                       0                
+  6   256
+ -2       0                       0                       0                
+  6   256
+ -2 -1.3312424436763837E+000       0                       0                
+  6   256
+ -2 -1.3312424436763837E+000       0                       0                
+  6   256
+ -2 -1.3312424436763837E+000       0                       0                
+  6   256
+ -2 -1.3312424436763837E+000       0                       0                
+  6   256
+ -2 -1.3312424436763837E+000       0                       0                
+  6   256
+ -2 -1.3312424436763837E+000       0                       0                
+  6   256
+ -2 -1.3312424436763839E+000       0                       0                
+  6   256
+ -2 -4.0697414024424622E-001       0                       0                
+  6   256
+ -2 -4.0697414024424622E-001       0                       0                
+  6   256
+ -2 -4.0697414024424622E-001       0                       0                
+  6   256
+ -2 -4.0697414024424622E-001       0                       0                
+  6   256
+ -2 -4.0697414024424622E-001       0                       0                
+  6   256
+ -2 -4.0697414024424622E-001       0                       0                
+  6   256
+ -2 -4.0697414024424616E-001       0                       0                
+  6   256
+ -2 -4.0697414024424616E-001       0                       0                
+  6   256
+ -2 1.3084295163102366E+001       0                 1.0000000000000000E+100
+  6   256
+ -2 2.9538743326244290E-017       0                       0                
+  6   256
+ -2 -2.9538743326244290E-017       0                       0                
+  6   256
+ -2       0                       0                       0                
+  6   256
+ -2 2.9538743326244290E-017       0                       0                
+  6   256
+ -2 5.9077486652488580E-017       0                       0                
+  6   256
+ -2 8.8616229978732852E-017       0                       0                
+  6   256
+ -2 1.7723245995746578E-016       0                       0                
+  6   256
+ -2 2.1200855995403750E-006       0                       0                
+  6   256
+ -2 -4.2905232320698348E-003       0                       0                
+  6   256
+ -2 1.3490091039416923E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 1.3490091039416947E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 1.3490091039416923E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 1.3490091039416923E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 1.3490091039416947E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 1.3490091039416983E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 1.3490091039417042E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 1.3490091039417148E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 -7.7706922484554816E+004       0                       0                
+  6   256
+ -2 -7.7706922484554671E+004       0                       0                
+  6   256
+ -2 -7.7706922484554816E+004       0                       0                
+  6   256
+ -2 -7.7706922484554816E+004       0                       0                
+  6   256
+ -2 -7.7706922484554671E+004       0                       0                
+  6   256
+ -2 -7.7706922484554467E+004       0                       0                
+  6   256
+ -2 -7.7706922484554132E+004       0                       0                
+  6   256
+ -2 -7.7706922484553535E+004       0                       0                
+  6   256
+ -2 3.5860651277745759E-001       0                       0                
+  6   256
+ -2 3.5860651277745820E-001       0                       0                
+  6   256
+ -2 3.5860651277745759E-001       0                       0                
+  6   256
+ -2 3.5860651277745759E-001       0                       0                
+  6   256
+ -2 3.5860651277745820E-001       0                       0                
+  6   256
+ -2 3.5860651277745920E-001       0                       0                
+  6   256
+ -2 3.5860651277746081E-001       0                       0                
+  6   256
+ -2 3.5860651277746380E-001       0                       0                
+  6   256
+ -2 -2.7866208490854413E+004       0                       0                
+  6   256
+ -2 -2.7866208490854409E+004       0                       0                
+  6   256
+ -2 -2.7866208490854413E+004       0                       0                
+  6   256
+ -2 -2.7866208490854413E+004       0                       0                
+  6   256
+ -2 -2.7866208490854409E+004       0                       0                
+  6   256
+ -2 -2.7866208490854413E+004       0                       0                
+  6   256
+ -2 -2.7866208490854417E+004       0                       0                
+  6   256
+ -2 -2.7866208490854438E+004       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 4.8616911917239025E+002       0                       0                
+  6   256
+ -2 4.8616911917239025E+002       0                       0                
+  6   256
+ -2 4.8616911917239025E+002       0                       0                
+  6   256
+ -2 4.8616911917239025E+002       0                       0                
+  6   256
+ -2 4.8616911917239025E+002       0                       0                
+  6   256
+ -2 4.8616911917239020E+002       0                       0                
+  6   256
+ -2 4.8616911917239020E+002       0                       0                
+  6   256
+ -2 4.8616911917238997E+002       0                       0                
+  6   256
+ -2 2.1532972093842350E+003       0                 1.0000000000000000E+100
+  6  1280
+ -2 2.1532972093842350E+003       0                 1.0000000000000000E+100
+  6  1280
+ -2 2.1532972093842350E+003       0                 1.0000000000000000E+100
+  6  1280
+ -2 2.1532972093842350E+003       0                 1.0000000000000000E+100
+  6  1280
+ -2 2.1532972093842350E+003       0                 1.0000000000000000E+100
+  6  1280
+ -2 2.1532972093842354E+003       0                 1.0000000000000000E+100
+  6  1280
+ -2 2.1532972093842354E+003       0                 1.0000000000000000E+100
+  6  1280
+ -2 4.6440407559250206E-004       0                 1.0000000000000000E+100
+  6  1280
+ -2 4.6440407559250206E-004       0                 1.0000000000000000E+100
+  6  1280
+ -2 4.6440407559250206E-004       0                 1.0000000000000000E+100
+  6  1280
+ -2 4.6440407559250206E-004       0                 1.0000000000000000E+100
+  6  1280
+ -2 4.6440407559250206E-004       0                 1.0000000000000000E+100
+  6  1280
+ -2 4.6440407559250195E-004       0                 1.0000000000000000E+100
+  6  1280
+ -2 4.6440407559250195E-004       0                 1.0000000000000000E+100
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853921393E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093842350E+003       0                  100000                
+  6   256
+ -2 5.3196722075299976E+002       1                   10000                
+  6   256
+ -2       0                       0                       0                
+  6   257
+ -2       1                       1                 1.0000000000000000E+100
+  6   258
+ -2 1.1449999999999999E+001       0                       0                
+  6   256
+ -2       0                       0                       0                
+  6   257
+ -2       1                       0                       0                
+  6   257
+ -2       2                       1                       5                
+  6   258
+ -2 9.8066499999999994E+000       0                       0                
+  6   256
+ -2 6.6249999999999998E-001       0                       0                
+  6   256
+ -2 1.5295743194668925E+000       0                 1.0000000000000000E+100
+  6   256
+ -2 -7.5880819289553870E+002       0                       0                
+  6   256
+ -2 -3.5239361737366964E-001       0                       0                
+  6   256
+ -2 -3.5239361737366964E-001       0                       0                
+  6   256
+ -2 4.5518390834331512E-008       0                       0                
+  6   256
+ -2 2.1555705789312298E-012       0                 1.0000000000000000E+100
+  6   256
+ -2 -1.6884621476987970E-008       0                       0                
+  6   256
+ -2 -1.6884621476987970E-008       0                       0                
+  6   256
+ -2 1.0000000000000000E-008       0                       0                
+  6   256
+ -2 9.9999999999999995E-007       0                       0                
+  6   256
+ -2 9.4999999999999996E-001       0                       0                
+  6   256
+ -2    1000                       0                       0                
+  6   256
+ -2       1                       0                       0                
+  6   257
+ -2 1.2660819853921393E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 2.1532972093842350E+003       0                  100000                
+  6   256
+ -2 5.3196722075299976E+002       1                   10000                
+  6   256
+ -2       1                       0                       0                
+  6   257
+ -2 1.2660819853977938E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 2.1532972093830749E+003       0                  100000                
+  6   256
+ -2 5.3196722075537559E+002       1                   10000                
+  6   256
+ -2       1                       0                       0                
+  6   256
+ -2       2                       0                       0                
+  6   256
+ -2       3                       0                       0                
+  6   256
+ -2       4                       0                       0                
+  6   256
+ -2       5                       0                       0                
+  6   256
+ -2       6                       0                       0                
+  6   256
+ -2       7                       0                       0                
+  6   256
+ -2       8                       0                       0                
+  6   256
+ -2       1                       0                       0                
+  6   256
+ -2       2                       0                       0                
+  6   256
+ -2       3                       0                       0                
+  6   256
+ -2       4                       0                       0                
+  6   256
+ -2       5                       0                       0                
+  6   256
+ -2       6                       0                       0                
+  6   256
+ -2       7                       0                       0                
+  6   256
+ -2       8                       0                       0                
+  6   256
+ -2     255                       0                     255                
+  6   258
+ -2       0                       0                     255                
+  6   258
+ -2       0                       0                     255                
+  6   258
+ -2       1                       0                       0                
+  6   256
+ -2       8                       0                       0                
+  6   256
+ -2     400                       0                       0                
+  6   256
+ -2     800                       0                       0                
+  6   256
+ -2       1                       0                       0                
+  6   256
+ -2       2                       0                       0                
+  6   256
+ -2       3                       0                       0                
+  6   256
+ -2       4                       0                       0                
+  6   256
+ -2       5                       0                       0                
+  6   256
+ -2       6                       0                       0                
+  6   256
+ -2       7                       0                       0                
+  6   256
+ -2       8                       0                       0                
+  6   256
+ -2       0                       0                       1                
+  6   256
+ -2 1.4285714285714285E-001       0                       1                
+  6   256
+ -2 2.8571428571428570E-001       0                       1                
+  6   256
+ -2 4.2857142857142855E-001       0                       1                
+  6   256
+ -2 5.7142857142857140E-001       0                       1                
+  6   256
+ -2 7.1428571428571430E-001       0                       1                
+  6   256
+ -2 8.5714285714285710E-001       0                       1                
+  6   256
+ -2       1                       0                       1                
+  6   256
+ -2 3.2991805188249967E-001       0                       1                
+  6   256
+ -2 3.2991805188249940E-001       0                       1                
+  6   256
+ -2 3.2991805188249967E-001       0                       1                
+  6   256
+ -2 3.2991805188249967E-001       0                       1                
+  6   256
+ -2 3.2991805188249940E-001       0                       1                
+  6   256
+ -2 3.2991805188249884E-001       0                       1                
+  6   256
+ -2 3.2991805188249801E-001       0                       1                
+  6   256
+ -2 3.2991805188249657E-001       0                       1                
+  6   256
+ -2       8                       0                       0                
+  6   258
+ -2     570                       0                       0                
+  6   258
+ -2       4                       0                       0                
+  6   256
+ -2 1.1570485743171209E-002       0                       0                
+  6   256
+ -2       8                       1                 1.0000000000000000E+100
+  6   262
+ -2       8                       2                 1.0000000000000000E+100
+  6   258
+ -2     570                       0                       0                
+  6   258
+ -2       4                       0                 1.0000000000000000E+100
+  6   256
+ -2      -4                       0                       0                
+  6   256
+ -2       5                       1                       5                
+  6   258
+ -2       0                       0                       0                
+  6   257
+ -2       3                       1                       3                
+  6   258
+ -2       1                       0                       0                
+  6   257
+ -2 1.5470000000000000E+006       0                       0                
+  6   256
+ -2 1.5300000000000000E+006       0                       0                
+  6   256
+ -2 1.5130000000000000E+006       0                       0                
+  6   256
+ -2 1.4960000000000000E+006       0                       0                
+  6   256
+ -2 1.4790000000000000E+006       0                       0                
+  6   256
+ -2 1.4620000000000000E+006       0                       0                
+  6   256
+ -2 1.4450000000000000E+006       0                       0                
+  6   256
+ -2 1.4280000000000000E+006       0                       0                
+  6   256
+ -2       2                       1                       5                
+  6   258
+ -2 9.8066499999999994E+000       0                       0                
+  6   256
+ -2 -7.5880819289553881E+002 -9.9999999999999995E+059  100000                
+  6   388
+ -2       8                       1                 1.0000000000000000E+100
+  6   262
+ -2       0                       0                       0                
+  6   388
+ -2       0                       0                       0                
+  6   388
+ -2       0                       0                       0                
+  6   388
+ -2       0                       0                       0                
+  6   388
+ -2       0                       0                       0                
+  6   388
+ -2       0                       0                       0                
+  6   388
+ -2       0                       0                       0                
+  6   388
+ -2       0                       0                       0                
+  6   388
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2       0                       0                       0                
+  6   256
+ -2 1.3084295163095318E+016       0                       0                
+  6   256
+ -2      -1                       0                       0                
+  6   256
+ -2 5.7142857142857140E-001       0                       0                
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853977938E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093830749E+003       0                  100000                
+  6   256
+ -2 5.3196722075537559E+002       1                   10000                
+  6   256
+ -2 2.0135927832420042E+005       0                 1.0000000000000000E+008
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853977936E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093830749E+003       0                  100000                
+  6   256
+ -2 5.3196722075537548E+002       1                   10000                
+  6   256
+ -2 2.0135927832420042E+005       0                 1.0000000000000000E+008
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853977938E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093830749E+003       0                  100000                
+  6   256
+ -2 5.3196722075537559E+002       1                   10000                
+  6   256
+ -2 2.0135927832420042E+005       0                 1.0000000000000000E+008
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853977936E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093830749E+003       0                  100000                
+  6   256
+ -2 5.3196722075537548E+002       1                   10000                
+  6   256
+ -2 2.0135927832420042E+005       0                 1.0000000000000000E+008
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853977936E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093830749E+003       0                  100000                
+  6   256
+ -2 5.3196722075537548E+002       1                   10000                
+  6   256
+ -2 2.0135927832420042E+005       0                 1.0000000000000000E+008
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853977938E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093830749E+003       0                  100000                
+  6   256
+ -2 5.3196722075537559E+002       1                   10000                
+  6   256
+ -2 2.0135927832420042E+005       0                 1.0000000000000000E+008
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853977941E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093830749E+003       0                  100000                
+  6   256
+ -2 5.3196722075537571E+002       1                   10000                
+  6   256
+ -2 2.0135927832420042E+005       0                 1.0000000000000000E+008
+  6   256
+ -2       0                       0                       2                
+  6   258
+ -2 1.2660819853977947E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 2.1532972093830745E+003       0                  100000                
+  6   256
+ -2 5.3196722075537593E+002       1                   10000                
+  6   256
+ -2 2.0135927832420042E+005       0                 1.0000000000000000E+008
+  6   256
+ -2 5.0797525497408458E-001       0                       0                
+  6   256
+ -2       0                       0                       0                
+  6   256
+ -2       0                       0                       0                
+  6   256
+ -2       0                       0                       0                
+  6   256
+ -2 -8.4466528313586139E+004       0                       0                
+  6   256
+ -2 -1.3312424436763839E+000       0                       0                
+  6   256
+ -2 -1.3312424436763837E+000       0                       0                
+  6   256
+ -2       0                       0                       0                
+  6   256
+ -2       0                       0                       0                
+  6   256
+ -2       0                       0                       0                
+  6   256
+ -2 -1.3312424436763839E+000       0                       0                
+  6   256
+ -2 -1.3312424436763839E+000       0                       0                
+  6   256
+ -2 -1.3312424436763839E+000       0                       0                
+  6   256
+ -2 -1.3312424436763839E+000       0                       0                
+  6   256
+ -2 -1.3312424436763839E+000       0                       0                
+  6   256
+ -2 -1.3312424436763839E+000       0                       0                
+  6   256
+ -2 -1.3312424436763839E+000       0                       0                
+  6   256
+ -2 -4.0697414024446554E-001       0                       0                
+  6   256
+ -2 -4.0697414024446554E-001       0                       0                
+  6   256
+ -2 -4.0697414024446554E-001       0                       0                
+  6   256
+ -2 -4.0697414024446554E-001       0                       0                
+  6   256
+ -2 -4.0697414024446554E-001       0                       0                
+  6   256
+ -2 -4.0697414024446554E-001       0                       0                
+  6   256
+ -2 -4.0697414024446554E-001       0                       0                
+  6   256
+ -2 -4.0697414024446560E-001       0                       0                
+  6   256
+ -2 1.3084295163095319E+001       0                 1.0000000000000000E+100
+  6   256
+ -2 2.9538743326260209E-017       0                       0                
+  6   256
+ -2 -2.9538743326260209E-017       0                       0                
+  6   256
+ -2 2.9538743326260209E-017       0                       0                
+  6   256
+ -2 -1.3624896391252218E-049       0                       0                
+  6   256
+ -2 -2.9538743326260209E-017       0                       0                
+  6   256
+ -2 -2.9538743326260209E-017       0                       0                
+  6   256
+ -2 -8.8616229978780627E-017       0                       0                
+  6   256
+ -2 -7.0669519984679186E-007       0                       0                
+  6   256
+ -2 4.2905232320698348E-003       0                       0                
+  6   256
+ -2 1.3490091038991669E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 1.3490091038991694E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 1.3490091038991669E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 1.3490091038991694E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 1.3490091038991694E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 1.3490091038991669E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 1.3490091038991647E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 1.3490091038991599E-004       0                 1.0000000000000000E+100
+  6   256
+ -2 -7.7706922487004427E+004       0                       0                
+  6   256
+ -2 -7.7706922487004282E+004       0                       0                
+  6   256
+ -2 -7.7706922487004427E+004       0                       0                
+  6   256
+ -2 -7.7706922487004282E+004       0                       0                
+  6   256
+ -2 -7.7706922487004282E+004       0                       0                
+  6   256
+ -2 -7.7706922487004427E+004       0                       0                
+  6   256
+ -2 -7.7706922487004544E+004       0                       0                
+  6   256
+ -2 -7.7706922487004820E+004       0                       0                
+  6   256
+ -2 3.5860651276567723E-001       0                       0                
+  6   256
+ -2 3.5860651276567790E-001       0                       0                
+  6   256
+ -2 3.5860651276567723E-001       0                       0                
+  6   256
+ -2 3.5860651276567790E-001       0                       0                
+  6   256
+ -2 3.5860651276567790E-001       0                       0                
+  6   256
+ -2 3.5860651276567723E-001       0                       0                
+  6   256
+ -2 3.5860651276567662E-001       0                       0                
+  6   256
+ -2 3.5860651276567523E-001       0                       0                
+  6   256
+ -2 -2.7866208490817444E+004       0                       0                
+  6   256
+ -2 -2.7866208490817444E+004       0                       0                
+  6   256
+ -2 -2.7866208490817444E+004       0                       0                
+  6   256
+ -2 -2.7866208490817444E+004       0                       0                
+  6   256
+ -2 -2.7866208490817444E+004       0                       0                
+  6   256
+ -2 -2.7866208490817444E+004       0                       0                
+  6   256
+ -2 -2.7866208490817440E+004       0                       0                
+  6   256
+ -2 -2.7866208490817429E+004       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 6.4955735200000211E+000       0                       0                
+  6   256
+ -2 4.8616911917303531E+002       0                       0                
+  6   256
+ -2 4.8616911917303531E+002       0                       0                
+  6   256
+ -2 4.8616911917303531E+002       0                       0                
+  6   256
+ -2 4.8616911917303531E+002       0                       0                
+  6   256
+ -2 4.8616911917303531E+002       0                       0                
+  6   256
+ -2 4.8616911917303531E+002       0                       0                
+  6   256
+ -2 4.8616911917303531E+002       0                       0                
+  6   256
+ -2 4.8616911917303548E+002       0                       0                
+  6   256
+ -2 2.1532972093830749E+003       0                 1.0000000000000000E+100
+  6  1280
+ -2 2.1532972093830749E+003       0                 1.0000000000000000E+100
+  6  1280
+ -2 2.1532972093830749E+003       0                 1.0000000000000000E+100
+  6  1280
+ -2 2.1532972093830749E+003       0                 1.0000000000000000E+100
+  6  1280
+ -2 2.1532972093830749E+003       0                 1.0000000000000000E+100
+  6  1280
+ -2 2.1532972093830749E+003       0                 1.0000000000000000E+100
+  6  1280
+ -2 2.1532972093830749E+003       0                 1.0000000000000000E+100
+  6  1280
+ -2 4.6440407559275224E-004       0                 1.0000000000000000E+100
+  6  1280
+ -2 4.6440407559275224E-004       0                 1.0000000000000000E+100
+  6  1280
+ -2 4.6440407559275224E-004       0                 1.0000000000000000E+100
+  6  1280
+ -2 4.6440407559275224E-004       0                 1.0000000000000000E+100
+  6  1280
+ -2 4.6440407559275224E-004       0                 1.0000000000000000E+100
+  6  1280
+ -2 4.6440407559275224E-004       0                 1.0000000000000000E+100
+  6  1280
+ -2 4.6440407559275224E-004       0                 1.0000000000000000E+100
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2 -2.0521008403361345E-004       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       0                       0                       0                
+  6  1280
+ -2       8                       0                       0                
+  6   258
+ -2       8                       1                 1.0000000000000000E+100
+  6   262
+ -2 5.3196722075537559E+002       0                 1.0000000000000000E+100
+  6   260
+ -2 5.3196722075537548E+002       0                 1.0000000000000000E+100
+  6   260
+ -2 5.3196722075537559E+002       0                 1.0000000000000000E+100
+  6   260
+ -2 5.3196722075537548E+002       0                 1.0000000000000000E+100
+  6   260
+ -2 5.3196722075537548E+002       0                 1.0000000000000000E+100
+  6   260
+ -2 5.3196722075537559E+002       0                 1.0000000000000000E+100
+  6   260
+ -2 5.3196722075537571E+002       0                 1.0000000000000000E+100
+  6   260
+ -2 5.3196722075537593E+002       0                 1.0000000000000000E+100
+  6   260
+ -2       8                       1                 1.0000000000000000E+100
+  6   262
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2   86000                       0                       0                
+  6   260
+ -2       8                       0                       0                
+  6   258
+ -2     570                       0                       0                
+  6   258
+ -2       4                       0                       0                
+  6   256
+ -2 1.1570485743171209E-002       0                       0                
+  6   256
+ -2       8                       1                 1.0000000000000000E+100
+  6   262
+ -2       0                       0                       2                
+  6   258
+ -2 2.1532972093830749E+003       0                  100000                
+  6   256
+ -2 7.4430977908577647E-016       0                       0                
+  6   256
+ -2 5.3196722075537559E+002       1                   10000                
+  6   256
+ -2 1.1401000000000000E+001       0                       0                
+  6   256
+ -2 1.8241000000000000E+001       0                       0                
+  6   256
+ -2  100000                       0                 1.0000000000000000E+008
+  6   256
+ -2       1                       0                       0                
+  6   257
+ -2 7.9997368651872647E-001       0                       0                
+  6   256
+ -2       1                       1                       5                
+  6   258
+ -2 2.7361499999999900E+001       0                       0                
+  6   256
+ -2 -6.2254420410676963E-017       0                       0                
+  6   256
+ -2 5.8917441594534786E+004       0                 1.0000000000000000E+100
+  6   256
+ -2 -1.1368683772161603E-013       0                       0                
+  6   256
+ -2 7.4591575278567169E+010       0                       0                
+  6   256
+ -2 -3.5762786865234375E-007       0                       0                
+  6   256
+ -2 1.2660819853977938E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 1.2660819853977936E+006 -1.0000000000000000E+010 1.0000000000000000E+010
+  6   256
+ -2 9.8066499999999994E+000       0                       0                
+  6   256
+
+# initialDescription
+char initialDescription(745,109)
+Default ambient pressure [Pa|bar]
+Default ambient temperature [K|degC]
+Constant gravity acceleration [m/s2]
+[:#(type=ORNL_AdvSMR.Choices.System.Dynamics)]
+Default start value for mass flow rates [kg/s]
+Regularization of zero flow for |m_flow| < eps_m_flow*m_flow_nominal
+Default small pressure drop for regularization of laminar and zero flow [Pa|bar]
+Default small mass flow rate for regularization of laminar and zero flow [kg/s]
+Thermal rating of one SmAHTR volume [W]
+Number of fuel assemblies [:#(type=Integer)]
+Number of fuel pins per assembly [:#(type=Integer)]
+Core Coolant Channel Width (m) [m]
+Coore Coolant Channel Depth (m) [m]
+Reactor nominal heat rating (W) [W]
+Number of radial nodes for fuel [:#(type=Integer)]
+Number of radial nodes for cladding [:#(type=Integer)]
+Number of fuel assemblies [:#(type=Integer)]
+Number of fuel pins in an assembly [:#(type=Integer)]
+Active height of a fuel pin [m]
+Use power profile output [:#(type=Boolean)]
+Delayed neutron precursor fractions
+Delayed neutron precursor fractions
+Delayed neutron precursor fractions
+Delayed neutron precursor fractions
+Delayed neutron precursor fractions
+Delayed neutron precursor fractions
+Decay constants for each precursor group [1/s]
+Decay constants for each precursor group [1/s]
+Decay constants for each precursor group [1/s]
+Decay constants for each precursor group [1/s]
+Decay constants for each precursor group [1/s]
+Decay constants for each precursor group [1/s]
+Mean neutron generation time [s]
+Fuel Doppler feedback coefficient
+Fuel reference temperature [K|degC]
+Coolant density feedback coefficient
+Coolant reference temperature [K|degC]
+Time since reactor startup [s]
+Check: Triangular pitch, Uncheck: Square pitch [:#(type=Boolean)]
+Bundle pitch (m) [m]
+Fuel pin diameter (m) [m]
+Channel height (m) [m]
+Nominal total mass flow rate through channels (kg/s) [kg/s]
+Primary coolant inlet temperature to core [K|degC]
+Primary coolant inlet temperature to core [K|degC]
+Upper plenum liquid/gas interface area (m2) [m2]
+Upper plenum volume (m3) [m3]
+Upper plenum cover gas temperature (C) [K|degC]
+Upper plenum cover gas pressure (kPa) [Pa|bar]
+Number of parallel pumps per loop [:#(type=Integer)]
+Nominal shaft rotational speed [:#(type=Integer)]
+Pump nominal inlet pressure (bar) [Pa|kPa]
+Nominal volumetric flow rate (m3/s) [m3/s]
+Nominal volumetric flow rate (m3/s) [m3/s]
+Nominal pump head (m) [m]
+Nominal pump head (m) [m]
+true to model the heat transfer process [:#(type=Boolean)]
+Cross-sectional area (single tube) [m2]
+Perimeter of heat transfer surface (single tube) [m]
+Hydraulic Diameter (single tube) [m]
+Pitch-to-diameter ratio
+Nominal mass flowrate (total) [kg/s]
+Nominal hydraulic resistance coefficient [Pa.kg/(m3.kg2/s2)]
+Nominal pressure drop (friction term only!) [Pa|kPa]
+Nominal inlet density [kg/m3|g/cm3]
+Nominal Fanning friction factor
+Relative roughness (ratio roughness/diameter)
+Avoid inlet enthalpy derivative [:#(type=Boolean)]
+Fluid phase (only for initialization!) [:#(type=ORNL_AdvSMR.Choices.FluidPhase.FluidPhases)]
+Pressure start value [Pa|bar]
+Inlet enthalpy start value [J/kg]
+Outlet enthalpy start value [J/kg]
+Fraction of nominal flow rate at which linear friction equals turbulent friction
+Friction factor correction coefficient
+Nominal Liquid Density [kg/m3|g/cm3]
+Nominal rotational speed [1/min]
+Mass Flow Rate Start Value [kg/s]
+Specific Enthalpy Start Value [J/kg]
+Nominal mass flow rate [kg/s]
+Nominal pressure increase [Pa|kPa]
+Constant output value
+
+
+
+
+Color (RGB) of curve [:#(type=Integer)]
+Color (RGB) of curve [:#(type=Integer)]
+Color (RGB) of curve [:#(type=Integer)]
+true to model the heat transfer process [:#(type=Boolean)]
+Cross-sectional area (single tube) [m2]
+Perimeter of heat transfer surface (single tube) [m]
+Hydraulic Diameter (single tube) [m]
+Pitch-to-diameter ratio
+Nominal mass flowrate (total) [kg/s]
+Nominal hydraulic resistance coefficient [Pa.kg/(m3.kg2/s2)]
+Nominal pressure drop (friction term only!) [Pa|kPa]
+Nominal inlet density [kg/m3|g/cm3]
+Nominal Fanning friction factor
+Relative roughness (ratio roughness/diameter)
+Avoid inlet enthalpy derivative [:#(type=Boolean)]
+Fluid phase (only for initialization!) [:#(type=ORNL_AdvSMR.Choices.FluidPhase.FluidPhases)]
+Pressure start value [Pa|bar]
+Inlet enthalpy start value [J/kg]
+Outlet enthalpy start value [J/kg]
+Fraction of nominal flow rate at which linear friction equals turbulent friction
+Friction factor correction coefficient
+Constant output value
+[J/kg]
+Enthalpy state variables [J/kg]
+Enthalpy state variables [J/kg]
+Enthalpy state variables [J/kg]
+Enthalpy state variables [J/kg]
+Enthalpy state variables [J/kg]
+Enthalpy state variables [J/kg]
+Enthalpy state variables [J/kg]
+Fluid specific enthalpy [J/kg]
+Enthalpy state variables [J/kg]
+Enthalpy state variables [J/kg]
+Enthalpy state variables [J/kg]
+Enthalpy state variables [J/kg]
+Enthalpy state variables [J/kg]
+Enthalpy state variables [J/kg]
+Enthalpy state variables [J/kg]
+Level [m]
+Liquid specific enthalpy [J/kg]
+der(Enthalpy state variables) [m2/s3]
+der(Enthalpy state variables) [m2/s3]
+der(Enthalpy state variables) [m2/s3]
+der(Enthalpy state variables) [m2/s3]
+der(Enthalpy state variables) [m2/s3]
+der(Enthalpy state variables) [m2/s3]
+der(Enthalpy state variables) [m2/s3]
+der(Fluid specific enthalpy) [m2/s3]
+der(Enthalpy state variables) [m2/s3]
+der(Enthalpy state variables) [m2/s3]
+der(Enthalpy state variables) [m2/s3]
+der(Enthalpy state variables) [m2/s3]
+der(Enthalpy state variables) [m2/s3]
+der(Enthalpy state variables) [m2/s3]
+der(Enthalpy state variables) [m2/s3]
+der(Level) [m/s]
+der(Liquid specific enthalpy) [m2/s3]
+= false to restrict to design flow direction (flangeA -> flangeB) [:#(type=Boolean)]
+Default formulation of energy balances [:#(type=Modelica.Fluid.Types.Dynamics)]
+Default formulation of mass balances [:#(type=Modelica.Fluid.Types.Dynamics)]
+Default formulation of substance balances [:#(type=Modelica.Fluid.Types.Dynamics)]
+Default formulation of trace substance balances [:#(type=Modelica.Fluid.Types.Dynamics)]
+Default formulation of momentum balances, if options available [:#(type=Modelica.Fluid.Types.Dynamics)]
+Default start value for pressures [Pa|bar]
+Default start value for temperatures [K|degC]
+= true to determine turbulent region automatically using Reynolds number [:#(type=Boolean)]
+Default nominal mass flow rate [kg/s]
+Thermal rating of one SmAHTR volume [W]
+Number of fuel assemblies [:#(type=Integer)]
+Number of fuel pins per assembly [:#(type=Integer)]
+Core Coolant Channel Width (m) [m]
+Coore Coolant Channel Depth (m) [m]
+Coor Coolant Channel Height (m) [m]
+Coor Coolant Channel Height (m) [m]
+Number of axial nodes [:#(type=Integer)]
+Total number of fuel pins in the core [:#(type=Integer)]
+Friction factor correlation [:#(type=ORNL_AdvSMR.Choices.Flow1D.FFtypes)]
+Channel flow area [m2]
+Heated perimeter [m]
+Hydraulic diameter [m]
+Pump internal chamber volume (m3) [m3]
+Nominal coolant density in the pump (kg/m3) [kg/m3|g/cm3]
+Number of Nodes [:#(type=Integer)]
+Number of nodes [:#(type=Integer)]
+Temperature at the nodes [K|degC]
+Temperature at the nodes [K|degC]
+Temperature at the nodes [K|degC]
+Temperature at the nodes [K|degC]
+Temperature at the nodes [K|degC]
+Temperature at the nodes [K|degC]
+Temperature at the nodes [K|degC]
+Temperature at the nodes [K|degC]
+Heat flux at the nodes [W/m2]
+Heat flux at the nodes [W/m2]
+Heat flux at the nodes [W/m2]
+Heat flux at the nodes [W/m2]
+Heat flux at the nodes [W/m2]
+Heat flux at the nodes [W/m2]
+Heat flux at the nodes [W/m2]
+Heat flux at the nodes [W/m2]
+Number of nodes [:#(type=Integer)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Number of nodes for thermal variables [:#(type=Integer)]
+Number of tubes in parallel [:#(type=Integer)]
+Tube length [m]
+Elevation of outlet over inlet [m]
+Friction Factor Type [:#(type=ORNL_AdvSMR.Choices.Flow1D.FFtypes)]
+Inertial phenomena accounted for [:#(type=Boolean)]
+Location of the hydraulic capacitance [:#(type=ORNL_AdvSMR.Choices.Flow1D.HCtypes)]
+= true to allow flow reversal, false restricts to design direction [:#(type=Boolean)]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Initialisation option [:#(type=ORNL_AdvSMR.Choices.Init.Options)]
+
+Mass flow rate from the connection point into the component [kg/s]
+Thermodynamic pressure in a defined point in the system [Pa|bar]
+Mass flow rate from the connection point into the component [kg/s]
+Number of nodes [:#(type=Integer)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Total heat flow through the lateral boundary (all Nt tubes) [W]
+Residence time [s]
+Slope
+Length of a single volume [m]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+Wet perimeter (single tube) [m]
+Pressure drop due to friction (total) [Pa|bar]
+Pressure drop due to friction (from inlet to capacitance) [Pa|bar]
+Pressure drop due to friction (from capacitance to outlet) [Pa|bar]
+Pressure drop due to static head [Pa|bar]
+Flow rate at the inlet (single tube) [kg/s]
+Flow rate at the outlet (single tube) [kg/s]
+Hydraulic friction coefficient
+Dynamic momentum term
+Fanning friction factor
+[kg/s]
+[kg/s]
+[kg/s]
+[kg/s]
+[kg/s]
+[kg/s]
+[kg/s]
+Fluid velocity [m/s]
+Fluid velocity [m/s]
+Fluid velocity [m/s]
+Fluid velocity [m/s]
+Fluid velocity [m/s]
+Fluid velocity [m/s]
+Fluid velocity [m/s]
+Fluid velocity [m/s]
+Fluid mass [kg]
+Time derivative of mass in each cell between two nodes
+Time derivative of mass in each cell between two nodes
+Time derivative of mass in each cell between two nodes
+Time derivative of mass in each cell between two nodes
+Time derivative of mass in each cell between two nodes
+Time derivative of mass in each cell between two nodes
+Time derivative of mass in each cell between two nodes
+Total heat generation rate across the channel [W]
+Total heat generation rate across the fluid ports [W]
+Dynamic viscosity [Pa.s]
+Dynamic viscosity [Pa.s]
+Dynamic viscosity [Pa.s]
+Dynamic viscosity [Pa.s]
+Dynamic viscosity [Pa.s]
+Dynamic viscosity [Pa.s]
+Dynamic viscosity [Pa.s]
+Dynamic viscosity [Pa.s]
+Reynolds number [1]
+Reynolds number [1]
+Reynolds number [1]
+Reynolds number [1]
+Reynolds number [1]
+Reynolds number [1]
+Reynolds number [1]
+Reynolds number [1]
+Prandtl number [1]
+Prandtl number [1]
+Prandtl number [1]
+Prandtl number [1]
+Prandtl number [1]
+Prandtl number [1]
+Prandtl number [1]
+Prandtl number [1]
+Peclet number [1]
+Peclet number [1]
+Peclet number [1]
+Peclet number [1]
+Peclet number [1]
+Peclet number [1]
+Peclet number [1]
+Peclet number [1]
+Nusselt number [1]
+Nusselt number [1]
+Nusselt number [1]
+Nusselt number [1]
+Nusselt number [1]
+Nusselt number [1]
+Nusselt number [1]
+Nusselt number [1]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Fluid average density [kg/m3|g/cm3]
+Fluid average density [kg/m3|g/cm3]
+Fluid average density [kg/m3|g/cm3]
+Fluid average density [kg/m3|g/cm3]
+Fluid average density [kg/m3|g/cm3]
+Fluid average density [kg/m3|g/cm3]
+Fluid average density [kg/m3|g/cm3]
+Fluid average specific volume [m3/kg]
+Fluid average specific volume [m3/kg]
+Fluid average specific volume [m3/kg]
+Fluid average specific volume [m3/kg]
+Fluid average specific volume [m3/kg]
+Fluid average specific volume [m3/kg]
+Fluid average specific volume [m3/kg]
+Average heat flux [W/m2]
+Average heat flux [W/m2]
+Average heat flux [W/m2]
+Average heat flux [W/m2]
+Average heat flux [W/m2]
+Average heat flux [W/m2]
+Average heat flux [W/m2]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of average density by enthalpy [kg.s2/m5]
+Derivative of average density by enthalpy [kg.s2/m5]
+Derivative of average density by enthalpy [kg.s2/m5]
+Derivative of average density by enthalpy [kg.s2/m5]
+Derivative of average density by enthalpy [kg.s2/m5]
+Derivative of average density by enthalpy [kg.s2/m5]
+Derivative of average density by enthalpy [kg.s2/m5]
+Derivative of density by pressure [s2/m2]
+Derivative of density by pressure [s2/m2]
+Derivative of density by pressure [s2/m2]
+Derivative of density by pressure [s2/m2]
+Derivative of density by pressure [s2/m2]
+Derivative of density by pressure [s2/m2]
+Derivative of density by pressure [s2/m2]
+Derivative of density by pressure [s2/m2]
+Derivative of average density by pressure [s2/m2]
+Derivative of average density by pressure [s2/m2]
+Derivative of average density by pressure [s2/m2]
+Derivative of average density by pressure [s2/m2]
+Derivative of average density by pressure [s2/m2]
+Derivative of average density by pressure [s2/m2]
+Derivative of average density by pressure [s2/m2]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+Use powerCharacteristic (vs. efficiencyCharacteristic) [:#(type=Boolean)]
+Nominal number of pumps in parallel [:#(type=Integer)]
+Pump Internal Volume [m3]
+Reverse flow stopped [:#(type=Boolean)]
+= true to allow flow reversal, false restricts to design direction [:#(type=Boolean)]
+Initialisation option [:#(type=ORNL_AdvSMR.Choices.Init.Options)]
+[m/s2]
+Nominal volume flow rate (single pump) [m3/s]
+Nominal pump head [m]
+Mass flow rate (single pump) [kg/s]
+Volume flow rate (single pump) [m3/s]
+Volume flow rate (total) [m3/s]
+Outlet pressure minus inlet pressure [Pa|bar]
+Pump head [m]
+Power Consumption (single pump) [W]
+Power Consumption (total) [W]
+Small coefficient to avoid numerical singularities [W]
+[1/min]
+Pump efficiency
+Constant rotational speed [1/min]
+= true to allow flow reversal, false restricts to design direction [:#(type=Boolean)]
+Specific enthalpy of the fluid [J/kg]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+= true to allow flow reversal, false restricts to design direction [:#(type=Boolean)]
+Specific enthalpy of the fluid [J/kg]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+Horizontal values for curve
+Horizontal values for curve
+Horizontal values for curve
+Horizontal values for curve
+Horizontal values for curve
+Horizontal values for curve
+Horizontal values for curve
+Horizontal values for curve
+
+
+
+
+
+
+
+
+[:#(type=Integer)]
+[:#(type=Integer)]
+[:#(type=Integer)]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Number of nodes [:#(type=Integer)]
+Number of tubes [:#(type=Integer)]
+Source length [m]
+Source perimeter (single tube) [m]
+Number of nodes [:#(type=Integer)]
+Number of nodes for thermal variables [:#(type=Integer)]
+Number of tubes in parallel [:#(type=Integer)]
+Tube length [m]
+Elevation of outlet over inlet [m]
+Friction Factor Type [:#(type=ORNL_AdvSMR.Choices.Flow1D.FFtypes)]
+Inertial phenomena accounted for [:#(type=Boolean)]
+Location of the hydraulic capacitance [:#(type=ORNL_AdvSMR.Choices.Flow1D.HCtypes)]
+= true to allow flow reversal, false restricts to design direction [:#(type=Boolean)]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Start value of enthalpy vector (initialized by default) [J/kg]
+Initialisation option [:#(type=ORNL_AdvSMR.Choices.Init.Options)]
+
+Mass flow rate from the connection point into the component [kg/s]
+Number of nodes [:#(type=Integer)]
+Heat flux at the nodes [W/m2]
+Heat flux at the nodes [W/m2]
+Heat flux at the nodes [W/m2]
+Heat flux at the nodes [W/m2]
+Heat flux at the nodes [W/m2]
+Heat flux at the nodes [W/m2]
+Heat flux at the nodes [W/m2]
+Heat flux at the nodes [W/m2]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Total heat flow through the lateral boundary (all Nt tubes) [W]
+Residence time [s]
+Slope
+Length of a single volume [m]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+specific enthalpy [J/kg]
+density [kg/m3|g/cm3]
+temperature [K|degC]
+pressure [Pa|bar]
+Wet perimeter (single tube) [m]
+Pressure drop due to friction (total) [Pa|bar]
+Pressure drop due to friction (from inlet to capacitance) [Pa|bar]
+Pressure drop due to friction (from capacitance to outlet) [Pa|bar]
+Pressure drop due to static head [Pa|bar]
+Flow rate at the inlet (single tube) [kg/s]
+Flow rate at the outlet (single tube) [kg/s]
+Hydraulic friction coefficient
+Dynamic momentum term
+Fanning friction factor
+[kg/s]
+[kg/s]
+[kg/s]
+[kg/s]
+[kg/s]
+[kg/s]
+[kg/s]
+Fluid velocity [m/s]
+Fluid velocity [m/s]
+Fluid velocity [m/s]
+Fluid velocity [m/s]
+Fluid velocity [m/s]
+Fluid velocity [m/s]
+Fluid velocity [m/s]
+Fluid velocity [m/s]
+Fluid mass [kg]
+Time derivative of mass in each cell between two nodes
+Time derivative of mass in each cell between two nodes
+Time derivative of mass in each cell between two nodes
+Time derivative of mass in each cell between two nodes
+Time derivative of mass in each cell between two nodes
+Time derivative of mass in each cell between two nodes
+Time derivative of mass in each cell between two nodes
+Total heat generation rate across the channel [W]
+Total heat generation rate across the fluid ports [W]
+Dynamic viscosity [Pa.s]
+Dynamic viscosity [Pa.s]
+Dynamic viscosity [Pa.s]
+Dynamic viscosity [Pa.s]
+Dynamic viscosity [Pa.s]
+Dynamic viscosity [Pa.s]
+Dynamic viscosity [Pa.s]
+Dynamic viscosity [Pa.s]
+Reynolds number [1]
+Reynolds number [1]
+Reynolds number [1]
+Reynolds number [1]
+Reynolds number [1]
+Reynolds number [1]
+Reynolds number [1]
+Reynolds number [1]
+Prandtl number [1]
+Prandtl number [1]
+Prandtl number [1]
+Prandtl number [1]
+Prandtl number [1]
+Prandtl number [1]
+Prandtl number [1]
+Prandtl number [1]
+Peclet number [1]
+Peclet number [1]
+Peclet number [1]
+Peclet number [1]
+Peclet number [1]
+Peclet number [1]
+Peclet number [1]
+Peclet number [1]
+Nusselt number [1]
+Nusselt number [1]
+Nusselt number [1]
+Nusselt number [1]
+Nusselt number [1]
+Nusselt number [1]
+Nusselt number [1]
+Nusselt number [1]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Coefficient of convective heat transfer (W/m2K) [W/(m2.K)]
+Fluid average density [kg/m3|g/cm3]
+Fluid average density [kg/m3|g/cm3]
+Fluid average density [kg/m3|g/cm3]
+Fluid average density [kg/m3|g/cm3]
+Fluid average density [kg/m3|g/cm3]
+Fluid average density [kg/m3|g/cm3]
+Fluid average density [kg/m3|g/cm3]
+Fluid average specific volume [m3/kg]
+Fluid average specific volume [m3/kg]
+Fluid average specific volume [m3/kg]
+Fluid average specific volume [m3/kg]
+Fluid average specific volume [m3/kg]
+Fluid average specific volume [m3/kg]
+Fluid average specific volume [m3/kg]
+Average heat flux [W/m2]
+Average heat flux [W/m2]
+Average heat flux [W/m2]
+Average heat flux [W/m2]
+Average heat flux [W/m2]
+Average heat flux [W/m2]
+Average heat flux [W/m2]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of density by enthalpy [kg.s2/m5]
+Derivative of average density by enthalpy [kg.s2/m5]
+Derivative of average density by enthalpy [kg.s2/m5]
+Derivative of average density by enthalpy [kg.s2/m5]
+Derivative of average density by enthalpy [kg.s2/m5]
+Derivative of average density by enthalpy [kg.s2/m5]
+Derivative of average density by enthalpy [kg.s2/m5]
+Derivative of average density by enthalpy [kg.s2/m5]
+Derivative of density by pressure [s2/m2]
+Derivative of density by pressure [s2/m2]
+Derivative of density by pressure [s2/m2]
+Derivative of density by pressure [s2/m2]
+Derivative of density by pressure [s2/m2]
+Derivative of density by pressure [s2/m2]
+Derivative of density by pressure [s2/m2]
+Derivative of density by pressure [s2/m2]
+Derivative of average density by pressure [s2/m2]
+Derivative of average density by pressure [s2/m2]
+Derivative of average density by pressure [s2/m2]
+Derivative of average density by pressure [s2/m2]
+Derivative of average density by pressure [s2/m2]
+Derivative of average density by pressure [s2/m2]
+Derivative of average density by pressure [s2/m2]
+Number of Nodes [:#(type=Integer)]
+Number of nodes [:#(type=Integer)]
+Temperature at the nodes [K|degC]
+Temperature at the nodes [K|degC]
+Temperature at the nodes [K|degC]
+Temperature at the nodes [K|degC]
+Temperature at the nodes [K|degC]
+Temperature at the nodes [K|degC]
+Temperature at the nodes [K|degC]
+Temperature at the nodes [K|degC]
+Number of nodes [:#(type=Integer)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Heat transfer coefficient [W/(m2.K)]
+Number of nodes [:#(type=Integer)]
+Number of tubes [:#(type=Integer)]
+Source length [m]
+Source perimeter (single tube) [m]
+Number of nodes [:#(type=Integer)]
+phase of the fluid: 1 for 1-phase, 2 for two-phase, 0 for not known, e.g., interactive use [:#(type=Integer)]
+density [kg/m3|g/cm3]
+der(density) [Pa.m-2.s]
+temperature [K|degC]
+Cross-sectional area [m2]
+Volume at zero level [m3]
+Surface pressure [Pa|bar]
+= true to allow flow reversal, false restricts to design direction [:#(type=Boolean)]
+Start level [m]
+Initialisation option [:#(type=ORNL_AdvSMR.Choices.Init.Options)]
+Liquid volume [m3]
+der(Liquid volume) [m3/s]
+Liquid mass [kg]
+der(Liquid mass) [kg/s]
+Liquid (total) enthalpy [J]
+der(Liquid (total) enthalpy) [W]
+Inlet specific enthalpy [J/kg]
+Outlet specific enthalpy [J/kg]
+
+

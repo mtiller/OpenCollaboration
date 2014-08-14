@@ -1,0 +1,1155 @@
+within ORNL_AdvSMR;
+package PlantSystems
+  model PRISM
+    extends Architecture.EndToEnd(
+      redeclare replaceable Implementations.DRACS.NoDRACS dracs,
+      redeclare replaceable
+        Implementations.PrimaryHeatTransportSystem.PRISM_PHTS2
+        primary_loop(FFtype=ORNL_AdvSMR.Choices.Flow1D.FFtypes.Colebrook),
+      redeclare replaceable
+        Implementations.IntermediateHeatExchanger.PRISM_IHX2
+        intermediate_heat_exchanger,
+      redeclare replaceable
+        Implementations.IntermediateHeatTransportSystem.PRISM_IHTS2
+        intermediate_loop,
+      redeclare replaceable
+        Implementations.SteamGenerator.PRISM_SteamGenerator1
+        steam_generator,
+      redeclare replaceable Implementations.PowerConversionSystem.PRISM_PCS1
+        power_conversion_system(noSteamLines=3),
+      redeclare replaceable Implementations.ElectricalGenerator.PRISM_G1 generator,
+      redeclare Implementations.EventDriver.PRISM_ED1 event_driver,
+      redeclare Implementations.ControlSystem.PRISM_CS1 control_system);
+    inner System system
+      annotation (Placement(transformation(extent={{-200,60},{-160,100}})));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,
+              -100},{200,100}}), graphics));
+  end PRISM;
+
+  model PRISM2
+    extends PRISM(redeclare
+        Implementations.IntermediateHeatTransportSystem.PRISM_IHTS2
+        intermediate_loop,
+      redeclare Implementations.PrimaryHeatTransportSystem.PRISM_PHTS2
+        primary_loop,
+      redeclare Implementations.IntermediateHeatExchanger.PRISM_IHX2
+        intermediate_heat_exchanger);
+  end PRISM2;
+
+  model PL2SG
+    extends Architecture.Primary2SteamGenerator(
+      redeclare Implementations.PrimaryHeatTransportSystem.PRISM_PHTS1
+        primary_loop(FFtype=ORNL_AdvSMR.Choices.Flow1D.FFtypes.Colebrook),
+      redeclare Implementations.IntermediateHeatExchanger.PRISM_IHX1
+        intermediate_heat_exchanger,
+      redeclare Implementations.IntermediateHeatTransportSystem.PRISM_IHTS1
+        intermediate_loop,
+      redeclare Implementations.SteamGenerator.PRISM_SteamGenerator1
+        steam_generator,
+      redeclare Implementations.EventDriver.PRISM_ED1 event_driver,
+      redeclare Implementations.ControlSystem.PRISM_CS1 control_system);
+    inner System system
+      annotation (Placement(transformation(extent={{-200,80},{-180,100}})));
+  end PL2SG;
+
+  model IHX_Test
+    extends Architecture.IHX_test(
+      redeclare Implementations.IntermediateHeatExchanger.PRISM_IHX1
+        intermediate_heat_exchanger(
+        flowPathLength=1,
+        shellDiameter=1,
+        shellFlowArea=1,
+        shellPerimeter=1,
+        redeclare model shellHeatTransfer =
+            Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.IdealFlowHeatTransfer,
+        shellHeatTrArea=1,
+        redeclare model ShellFlowModel =
+            Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalTurbulentPipeFlow,
+        shellWallThickness=1,
+        tubeDiameter=1,
+        tubeHeatTrArea=1,
+        tubeWallThickness=1,
+        tubeWallRho=1,
+        tubeWallCp=1,
+        tubeWallK=1),
+      redeclare Implementations.PrimaryHeatTransportSystem.PRISM_PHTS_BC
+        primary_loop(FFtype=ORNL_AdvSMR.Choices.Flow1D.FFtypes.Colebrook),
+      redeclare
+        Implementations.IntermediateHeatTransportSystem.PRISM_IHTS_simple_noPD
+        intermediate_loop(ihx2sg=15));
+
+    inner System system
+      annotation (Placement(transformation(extent={{-200,80},{-180,100}})));
+    Components.SourceW shellIn(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      w0=1126.4,
+      h=28.8858e3 + 1.2753e3*(468 + 273),
+      p0=100000) annotation (Placement(transformation(extent={{-140,0},{-120,20}})));
+    Components.SinkP shellOut(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=28.8858e3 + 1.2753e3*(319 + 273),
+      p0=100000) annotation (Placement(transformation(extent={{-120,-20},{-140,
+              0}})));
+    Components.SourceW shellIn1(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=28.8858e3 + 1.2753e3*(282 + 273),
+      w0=1152.9,
+      p0=100000) annotation (Placement(transformation(extent={{140,0},{120,-20}})));
+    Components.SinkP shellOut1(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      p0=100000,
+      h=28.8858e3 + 1.2753e3*(426.7 + 273))
+                 annotation (Placement(transformation(extent={{120,0},{140,20}})));
+    Modelica.Blocks.Sources.Ramp ramp(
+      duration=1,
+      offset=28.8858e3 + 1.2753e3*(282 + 273),
+      height=-1.2753e3*20,
+      startTime=5000)
+      annotation (Placement(transformation(extent={{160,-60},{140,-40}})));
+  equation
+    connect(shellIn.flange, primary_loop.fromDRACS) annotation (Line(
+        points={{-120,10},{-100,10}},
+        color={0,127,255},
+        smooth=Smooth.None));
+    connect(shellOut.flange, primary_loop.toDRACS) annotation (Line(
+        points={{-120,-10},{-100,-10}},
+        color={0,127,255},
+        smooth=Smooth.None));
+    connect(intermediate_loop.toSG, shellOut1.flange) annotation (Line(
+        points={{99.5,10.5},{109.75,10.5},{109.75,10},{120,10}},
+        color={0,127,255},
+        smooth=Smooth.None));
+    connect(shellIn1.flange, intermediate_loop.fromSG) annotation (Line(
+        points={{120,-10},{112,-10},{112,-5.5},{100.5,-5.5}},
+        color={0,127,255},
+        smooth=Smooth.None));
+    connect(ramp.y, shellIn1.in_h) annotation (Line(
+        points={{139,-50},{126,-50},{126,-16}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,
+              -100},{200,100}}),      graphics),
+      experiment(
+        StopTime=10000,
+        __Dymola_NumberOfIntervals=10000,
+        Tolerance=1e-006,
+        __Dymola_Algorithm="Dassl"),
+      __Dymola_experimentSetupOutput);
+  end IHX_Test;
+
+  model IHXtest
+    Implementations.IntermediateHeatExchanger.PRISM_IHX1 pRISM_IHX1_1(
+      flowPathLength=1,
+      shellDiameter=1,
+      shellFlowArea=1,
+      shellPerimeter=1,
+      redeclare model shellHeatTransfer =
+          Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer,
+      shellHeatTrArea=1,
+      redeclare model ShellFlowModel =
+          Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow,
+      shellWallThickness=1,
+      tubeDiameter=1,
+      tubeHeatTrArea=1,
+      tubeWallThickness=1,
+      tubeWallRho=1,
+      tubeWallCp=1,
+      tubeWallK=1)
+      annotation (Placement(transformation(extent={{-40,-40},{40,40}})));
+
+    Components.SourceW shellIn(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      w0=1126.4,
+      h=28.8858e3 + 1.2753e3*(468 + 273),
+      p0=100000) annotation (Placement(transformation(extent={{-80,10},{-60,30}})));
+    Modelica.Blocks.Sources.Ramp ramp2(
+      duration=1,
+      startTime=5000,
+      offset=28.8858e3 + 1.2753e3*(468 + 273),
+      height=1.2753e3*10) annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={-70,50})));
+    Components.SourceW tubeIn(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      w0=1152.9,
+      h=28.8858e3 + 1.2753e3*(282 + 273),
+      p0=100000) annotation (Placement(transformation(
+          extent={{-10,10},{10,-10}},
+          rotation=270,
+          origin={0,70})));
+    Components.SinkP tubeOut(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=28.8858e3 + 1.2753e3*(426.7 + 273),
+      p0=100000) annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={0,-70})));
+    Components.SinkP shellOut(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=28.8858e3 + 1.2753e3*(319 + 273),
+      p0=100000) annotation (Placement(transformation(extent={{60,-24},{80,-4}})));
+    inner System system
+      annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
+  equation
+    connect(tubeIn.flange, pRISM_IHX1_1.tubeInlet) annotation (Line(
+        points={{0,60},{0,44}},
+        color={0,127,255},
+        smooth=Smooth.None));
+    connect(ramp2.y, shellIn.in_h) annotation (Line(
+        points={{-70,39},{-70,32},{-66,32},{-66,26}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(shellIn.flange, pRISM_IHX1_1.shellInlet) annotation (Line(
+        points={{-60,20},{-40,20}},
+        color={0,127,255},
+        smooth=Smooth.None));
+    connect(shellOut.flange, pRISM_IHX1_1.shellOutlet) annotation (Line(
+        points={{60,-14},{38,-14}},
+        color={0,127,255},
+        smooth=Smooth.None));
+    connect(tubeOut.flange, pRISM_IHX1_1.tubeOutlet) annotation (Line(
+        points={{0,-60},{0,-44}},
+        color={0,127,255},
+        smooth=Smooth.None));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+              -100,-100},{100,100}}), graphics));
+  end IHXtest;
+
+  model PRISM3
+    extends PRISM(redeclare
+        Implementations.IntermediateHeatTransportSystem.PRISM_IHTS1
+        intermediate_loop,
+      redeclare Implementations.PrimaryHeatTransportSystem.PRISM_PHTS2
+        primary_loop,
+      redeclare Implementations.IntermediateHeatExchanger.PRISM_IHX2
+        intermediate_heat_exchanger);
+  end PRISM3;
+
+  model Rx2IHX
+
+    import Modelica.Math.Vectors.*;
+
+    extends Architecture.Rx2IHX(
+      redeclare Implementations.PrimaryHeatTransportSystem.PRISM_PHTS1_noRx
+        primary_loop(
+        H_fuelPin=4.0132,
+        H_coreChannel=4.0132,
+        FFtype=ORNL_AdvSMR.Choices.Flow1D.FFtypes.Colebrook,
+        Q_nom=425e6/2),
+      redeclare Implementations.IntermediateHeatExchanger.PRISM_IHX1
+        intermediate_heat_exchanger(
+        flowPathLength=1,
+        shellDiameter=1,
+        shellFlowArea=1,
+        shellPerimeter=1,
+        shellHeatTrArea=1,
+        shellWallThickness=1,
+        tubeDiameter=1,
+        tubeHeatTrArea=1,
+        tubeWallRho=1,
+        tubeWallCp=1,
+        tubeWallK=1,
+        tubeWallThickness=1,
+        Twall_start=773.15));
+
+    inner System system
+      annotation (Placement(transformation(extent={{-200,80},{-180,100}})));
+    Components.SourceW sodiumIn(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=1248.31e3,
+      w0=655.19,
+      p0=6653000)
+      annotation (Placement(transformation(extent={{10,10},{-10,-10}},
+          rotation=180,
+          origin={-110,10})));
+    Components.SinkP sodiumOut(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=1248.31e3,
+      p0=6653000)
+      annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={-110,-10})));
+
+    Components.SourceW sodiumIn1(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=28.8858e3 + 1.2753e3*(282 + 273.15),
+      p0=100000)
+      annotation (Placement(transformation(extent={{10,-10},{-10,10}},
+          rotation=90,
+          origin={40,70})));
+    Components.SinkP sodiumOut1(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      p0=100000,
+      h=28.8858e3 + 1.2753e3*(426.7 + 273))
+      annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={40,-70})));
+    Modelica.Blocks.Sources.Ramp w_sec(
+      offset=1152.9,
+      duration=0,
+      height=-1152.9/4,
+      startTime=200) annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={-10,90})));
+    Modelica.Blocks.Sources.Ramp w_sec1(
+      duration=0,
+      offset=28.8858e3 + 1.2753e3*(282 + 273.15),
+      height=-1.2753e3*32,
+      startTime=700) annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={-10,50})));
+    UserInteraction.Outputs.SpatialPlot spatialPlot(
+      x=linspace(
+          0,
+          1,
+          8),
+      minX=0,
+      maxX=1,
+      y=primary_loop.core.T .- 273.15,
+      minY=250,
+      maxY=500)
+      annotation (Placement(transformation(extent={{-184,14},{-54,108}})));
+    UserInteraction.Outputs.SpatialPlot2 spatialPlot2_1(
+      maxY1=500,
+      maxY2=500,
+      x1=linspace(
+          0,
+          1,
+          10),
+      x2=linspace(
+          0,
+          1,
+          10),
+      y2=reverse(intermediate_heat_exchanger.tube.T) .- 273.15,
+      y1=intermediate_heat_exchanger.shell.T .- 273.15,
+      minY1=250,
+      minY2=250)
+      annotation (Placement(transformation(extent={{-198,-106},{12,-14}})));
+    UserInteraction.Outputs.NumericValue numericValue(             input_Value=
+          primary_loop.core.T[8] - 273.15, precision=1)
+      annotation (Placement(transformation(extent={{-18,8},{-4,22}})));
+    UserInteraction.Outputs.NumericValue numericValue1(             input_Value=
+         primary_loop.core.T[1] - 273.15, precision=1)
+      annotation (Placement(transformation(extent={{-18,-22},{-4,-8}})));
+  equation
+    connect(primary_loop.toDRACS, sodiumOut.flange) annotation (Line(
+        points={{-60,-10},{-100,-10}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+    connect(primary_loop.fromDRACS, sodiumIn.flange) annotation (Line(
+        points={{-60,10},{-100,10}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+
+    connect(intermediate_heat_exchanger.tubeInlet, sodiumIn1.flange)
+      annotation (Line(
+        points={{40,22},{40,60}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+    connect(intermediate_heat_exchanger.tubeOutlet, sodiumOut1.flange)
+      annotation (Line(
+        points={{40,-22},{40,-60}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+    connect(sodiumIn1.in_w0, w_sec.y) annotation (Line(
+        points={{34,74},{20,74},{20,90},{1,90}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(w_sec1.y, sodiumIn1.in_h) annotation (Line(
+        points={{1,50},{20,50},{20,66},{34,66}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,
+              -100},{200,100}}), graphics),
+      experiment(
+        StopTime=1000,
+        __Dymola_NumberOfIntervals=1000,
+        Tolerance=1e-006),
+      __Dymola_experimentSetupOutput);
+  end Rx2IHX;
+
+  model Rx2IHTS
+
+    import Modelica.Math.Vectors.*;
+
+    extends Architecture.Rx2IHTS(
+      redeclare Implementations.PrimaryHeatTransportSystem.PRISM_PHTS1_noRx
+        primary_loop(
+        H_fuelPin=4.0132,
+        H_coreChannel=4.0132,
+        FFtype=ORNL_AdvSMR.Choices.Flow1D.FFtypes.Colebrook,
+        Q_nom=425e6/2),
+      redeclare Implementations.IntermediateHeatExchanger.PRISM_IHX1
+        intermediate_heat_exchanger(
+        flowPathLength=1,
+        shellDiameter=1,
+        shellFlowArea=1,
+        shellPerimeter=1,
+        shellHeatTrArea=1,
+        shellWallThickness=1,
+        tubeDiameter=1,
+        tubeHeatTrArea=1,
+        tubeWallRho=1,
+        tubeWallCp=1,
+        tubeWallK=1,
+        tubeWallThickness=1,
+        Twall_start=773.15),
+      redeclare
+        Implementations.IntermediateHeatTransportSystem.PRISM_IHTS_simple_noPD
+        intermediate_loop,
+      redeclare Implementations.EventDriver.PRISM_ED1 eventDriver,
+      redeclare Implementations.ControlSystem.PRISM_CS1 controlSystem);
+
+    inner System system
+      annotation (Placement(transformation(extent={{-10,-100},{10,-80}})));
+    Components.SourceW sodiumIn(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=1248.31e3,
+      w0=655.19,
+      p0=6653000)
+      annotation (Placement(transformation(extent={{10,10},{-10,-10}},
+          rotation=180,
+          origin={-110,10})));
+    Components.SinkP sodiumOut(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=1248.31e3,
+      p0=6653000)
+      annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={-110,-10})));
+
+    Components.SourceW sodiumIn1(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=28.8858e3 + 1.2753e3*(282 + 273.15),
+      p0=100000)
+      annotation (Placement(transformation(extent={{-10,10},{10,-10}},
+          rotation=180,
+          origin={130,-32})));
+    Components.SinkP sodiumOut1(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      p0=100000,
+      h=28.8858e3 + 1.2753e3*(426.7 + 273))
+      annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={110,20})));
+    Modelica.Blocks.Sources.Ramp w_sec(
+      offset=1152.9,
+      duration=0,
+      height=-1152.9/4,
+      startTime=200) annotation (Placement(transformation(
+          extent={{10,-10},{-10,10}},
+          rotation=0,
+          origin={190,-20})));
+    Modelica.Blocks.Sources.Ramp h_sec(
+      duration=0,
+      offset=28.8858e3 + 1.2753e3*(282 + 273.15),
+      height=-1.2753e3*32,
+      startTime=700) annotation (Placement(transformation(
+          extent={{10,-10},{-10,10}},
+          rotation=0,
+          origin={150,0})));
+    UserInteraction.Outputs.SpatialPlot spatialPlot(
+      x=linspace(
+          0,
+          1,
+          8),
+      minX=0,
+      maxX=1,
+      y=primary_loop.core.T .- 273.15,
+      minY=300,
+      maxY=550)
+      annotation (Placement(transformation(extent={{-210,24},{-70,106}})));
+    UserInteraction.Outputs.SpatialPlot2 spatialPlot2_1(
+      maxY1=500,
+      maxY2=500,
+      x1=linspace(
+          0,
+          1,
+          10),
+      x2=linspace(
+          0,
+          1,
+          10),
+      y2=reverse(intermediate_heat_exchanger.tube.T) .- 273.15,
+      y1=intermediate_heat_exchanger.shell.T .- 273.15,
+      minY1=250,
+      minY2=250)
+      annotation (Placement(transformation(extent={{-208,-104},{-84,-16}})));
+    UserInteraction.Outputs.NumericValue numericValue(             input_Value=
+          primary_loop.core.T[8] - 273.15, precision=1)
+      annotation (Placement(transformation(extent={{-38,8},{-24,22}})));
+    UserInteraction.Outputs.NumericValue numericValue1(             input_Value=
+         primary_loop.core.T[1] - 273.15, precision=1)
+      annotation (Placement(transformation(extent={{-38,-12},{-24,2}})));
+    UserInteraction.Outputs.DynamicDiagram dynamicDiagram(label=
+          "Secondary flow rate")
+      annotation (Placement(transformation(extent={{100,-100},{200,-40}})));
+    UserInteraction.Outputs.NumericValue numericValue2(precision=1, input_Value=
+         time) annotation (Placement(transformation(extent={{0,60},{20,80}})));
+    UserInteraction.Outputs.DynamicDiagram dynamicDiagram1(label=
+          "Secondary input enthalpy")
+      annotation (Placement(transformation(extent={{100,40},{200,100}})));
+  equation
+    connect(primary_loop.toDRACS, sodiumOut.flange) annotation (Line(
+        points={{-80,-10},{-100,-10}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+    connect(primary_loop.fromDRACS, sodiumIn.flange) annotation (Line(
+        points={{-80,10},{-100,10}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+
+    connect(sodiumIn1.in_w0, w_sec.y) annotation (Line(
+        points={{134,-26},{134,-20},{179,-20}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(h_sec.y, sodiumIn1.in_h) annotation (Line(
+        points={{139,0},{126,0},{126,-26}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(intermediate_loop.fromSG, sodiumIn1.flange) annotation (Line(
+        points={{80.5,-5.5},{100,-5.5},{100,-32},{120,-32}},
+        color={0,127,255},
+        smooth=Smooth.None));
+    connect(intermediate_loop.toSG, sodiumOut1.flange) annotation (Line(
+        points={{79.5,10.5},{90,10.5},{90,20},{100,20}},
+        color={0,127,255},
+        smooth=Smooth.None));
+    connect(dynamicDiagram.Value, w_sec.y) annotation (Line(
+        points={{100,-70},{92,-70},{92,-20},{179,-20}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(h_sec.y, dynamicDiagram1.Value) annotation (Line(
+        points={{139,0},{86,0},{86,70},{100,70}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,
+              -100},{200,100}}), graphics),
+      experiment(
+        StopTime=1000,
+        __Dymola_NumberOfIntervals=1000,
+        Tolerance=1e-006),
+      __Dymola_experimentSetupOutput);
+  end Rx2IHTS;
+
+  model Rx2Sg
+
+    import Modelica.Math.Vectors.*;
+
+    extends Architecture.Rx2Sg(
+      redeclare Implementations.PrimaryHeatTransportSystem.PRISM_PHTS1_noRx
+        primary_loop(
+        H_fuelPin=4.0132,
+        H_coreChannel=4.0132,
+        FFtype=ORNL_AdvSMR.Choices.Flow1D.FFtypes.Colebrook,
+        Q_nom=425e6/2),
+      redeclare Implementations.IntermediateHeatExchanger.PRISM_IHX1
+        intermediate_heat_exchanger(
+        flowPathLength=1,
+        shellDiameter=1,
+        shellFlowArea=1,
+        shellPerimeter=1,
+        shellHeatTrArea=1,
+        shellWallThickness=1,
+        tubeDiameter=1,
+        tubeHeatTrArea=1,
+        tubeWallRho=1,
+        tubeWallCp=1,
+        tubeWallK=1,
+        tubeWallThickness=1,
+        Twall_start=773.15),
+      redeclare
+        Implementations.IntermediateHeatTransportSystem.PRISM_IHTS_simple_noPD
+        intermediate_loop(nNodes=10),
+      redeclare Implementations.EventDriver.PRISM_ED1 eventDriver,
+      redeclare Implementations.ControlSystem.PRISM_CS1 controlSystem,
+      redeclare Implementations.SteamGenerator.PRISM_SteamGenerator1
+        steam_generator(
+        redeclare package tubeMedium =
+            ORNL_AdvSMR.Media.Fluids.Water.StandardWater,
+        redeclare package shellMedium = ORNL_AdvSMR.Media.Fluids.Na,
+        flowPathLength=1,
+        shellDiameter=1,
+        shellFlowArea=1,
+        shellPerimeter=1,
+        shellHeatTrArea=1,
+        shellWallThickness=1,
+        tubeFlowArea=1,
+        tubePerimeter=1,
+        tubeHeatTrArea=1,
+        tubeWallThickness=1,
+        tubeWallRho=1,
+        tubeWallCp=1,
+        tubeWallK=1,
+        Twall_start=573.15));
+
+    inner System system
+      annotation (Placement(transformation(extent={{-10,-100},{10,-80}})));
+    Components.SourceW sodiumIn(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=1248.31e3,
+      w0=655.19,
+      p0=6653000)
+      annotation (Placement(transformation(extent={{10,10},{-10,-10}},
+          rotation=180,
+          origin={-170,10})));
+    Components.SinkP sodiumOut(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=1248.31e3,
+      p0=6653000)
+      annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={-170,-10})));
+
+    Modelica.Blocks.Sources.Ramp w_sg(
+      duration=0,
+      offset=2*272,
+      startTime=2000,
+      height=0)       annotation (Placement(transformation(
+          extent={{10,-10},{-10,10}},
+          rotation=0,
+          origin={80,90})));
+    UserInteraction.Outputs.SpatialPlot spatialPlot(
+      x=linspace(
+          0,
+          1,
+          8),
+      minX=0,
+      maxX=1,
+      y=primary_loop.core.T .- 273.15,
+      minY=300,
+      maxY=500)
+      annotation (Placement(transformation(extent={{-210,24},{-70,106}})));
+    UserInteraction.Outputs.SpatialPlot2 spatialPlot2_1(
+      x1=linspace(
+          0,
+          1,
+          10),
+      x2=linspace(
+          0,
+          1,
+          10),
+      y2=reverse(intermediate_heat_exchanger.tube.T) .- 273.15,
+      y1=intermediate_heat_exchanger.shell.T .- 273.15,
+      maxY1=600,
+      maxY2=600,
+      minY1=200,
+      minY2=200)
+      annotation (Placement(transformation(extent={{-208,-104},{-84,-16}})));
+    UserInteraction.Outputs.NumericValue numericValue(             input_Value=
+          primary_loop.core.T[8] - 273.15, precision=1)
+      annotation (Placement(transformation(extent={{-98,8},{-84,22}})));
+    UserInteraction.Outputs.NumericValue numericValue1(             input_Value=
+         primary_loop.core.T[1] - 273.15, precision=1)
+      annotation (Placement(transformation(extent={{-98,-12},{-84,2}})));
+    UserInteraction.Outputs.DynamicDiagram dynamicDiagram(label="Secondary flow rate")
+      annotation (Placement(transformation(extent={{100,-100},{200,-40}})));
+    UserInteraction.Outputs.NumericValue numericValue2(precision=1, input_Value=
+          time) annotation (Placement(transformation(extent={{0,60},{20,80}})));
+    UserInteraction.Outputs.DynamicDiagram dynamicDiagram1(label="Secondary input enthalpy")
+      annotation (Placement(transformation(extent={{100,40},{200,100}})));
+    Components.SinkP shellOut1(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Water.StandardWater,
+      h=5*975.6623e3,
+      p0=7143000)
+                 annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={20,-60})));
+
+    Components.SourceW shellIn1(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Water.StandardWater,
+        p0=7143000)
+                 annotation (Placement(transformation(extent={{10,10},{-10,-10}},
+          rotation=90,
+          origin={50,70})));
+
+    Modelica.Blocks.Sources.Pulse h_sg(
+      offset=975.6623e3,
+      width=100,
+      nperiod=1,
+      startTime=2000,
+      amplitude=-975.6623e3/10,
+      period=500)
+      annotation (Placement(transformation(extent={{90,40},{70,60}})));
+  equation
+    connect(primary_loop.toDRACS, sodiumOut.flange) annotation (Line(
+        points={{-140,-10},{-160,-10}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+    connect(primary_loop.fromDRACS, sodiumIn.flange) annotation (Line(
+        points={{-140,10},{-160,10}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+
+    connect(shellIn1.flange, steam_generator.tubeInlet) annotation (Line(
+        points={{50,60},{50,40},{60,40},{60,22}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+    connect(shellIn1.in_h, h_sg.y) annotation (Line(
+        points={{56,66},{62,66},{62,50},{69,50}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(shellIn1.in_w0, w_sg.y) annotation (Line(
+        points={{56,74},{62,74},{62,90},{69,90}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(shellOut1.flange, steam_generator.tubeOutlet) annotation (Line(
+        points={{20,-50},{20,-34},{60,-34},{60,-22}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+    connect(dynamicDiagram1.Value, w_sg.y) annotation (Line(
+        points={{100,70},{82,70},{82,74},{62,74},{62,90},{69,90}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(dynamicDiagram.Value, h_sg.y) annotation (Line(
+        points={{100,-70},{92,-70},{92,66},{62,66},{62,50},{69,50}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,
+              -100},{200,100}}), graphics),
+      experiment(
+        StopTime=5000,
+        __Dymola_NumberOfIntervals=1000,
+        Tolerance=1e-006),
+      __Dymola_experimentSetupOutput);
+  end Rx2Sg;
+
+  model Rx2Sg1
+
+    extends Architecture.Rx2Sg(
+      redeclare Implementations.PrimaryHeatTransportSystem.PRISM_PHTS1_noRx
+        primary_loop(FFtype=ORNL_AdvSMR.Choices.Flow1D.FFtypes.Colebrook,
+        D_fuelPin=7.366e-3,
+        Q_nom=425e6),
+      redeclare Implementations.IntermediateHeatExchanger.PRISM_IHX1
+        intermediate_heat_exchanger(
+        flowPathLength=1,
+        shellDiameter=1,
+        shellFlowArea=1,
+        shellPerimeter=1,
+        shellHeatTrArea=1,
+        shellWallThickness=1,
+        tubeDiameter=1,
+        tubeHeatTrArea=1,
+        tubeWallThickness=1,
+        tubeWallRho=1,
+        tubeWallCp=1,
+        tubeWallK=1,
+        Twall_start=773.15),
+      redeclare
+        Implementations.IntermediateHeatTransportSystem.PRISM_IHTS_simple_noPD
+        intermediate_loop,
+      redeclare Implementations.SteamGenerator.PRISM_SteamGenerator1
+        steam_generator(
+        redeclare package shellMedium = Modelica.Media.Examples.TwoPhaseWater,
+        redeclare package tubeMedium = ORNL_AdvSMR.Media.Fluids.Na,
+        flowPathLength=1,
+        shellDiameter=1,
+        shellFlowArea=1,
+        shellPerimeter=1,
+        shellHeatTrArea=1,
+        shellWallThickness=1,
+        tubeFlowArea=1,
+        tubePerimeter=1,
+        tubeHeatTrArea=1,
+        tubeWallThickness=1,
+        tubeWallRho=1,
+        tubeWallCp=1,
+        tubeWallK=1,
+        Twall_start=773.15),
+      redeclare Implementations.EventDriver.PRISM_ED1 eventDriver,
+      redeclare Implementations.ControlSystem.PRISM_CS1 controlSystem);
+
+    Components.SourceW shellIn(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      w0=1126.4,
+      h=28.8858e3 + 1.2753e3*(468 + 273),
+      p0=100000) annotation (Placement(transformation(extent={{-180,0},{-160,20}})));
+    Components.SinkP shellOut(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=28.8858e3 + 1.2753e3*(319 + 273),
+      p0=100000) annotation (Placement(transformation(extent={{-160,-20},{-180,
+              0}})));
+    Components.SourceW shellIn1(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Water.StandardWater,
+      w0=272,
+      p0=7143000)
+                 annotation (Placement(transformation(extent={{140,-22},{120,
+              -42}})));
+    Components.SinkP shellOut1(
+      h=28.8858e3 + 1.2753e3*(426.7 + 273),
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Water.StandardWater,
+      p0=100000) annotation (Placement(transformation(extent={{120,-18},{140,2}})));
+    Modelica.Blocks.Sources.Ramp ramp(
+      duration=1,
+      startTime=5000,
+      height=0,
+      offset=975.6623e3)
+      annotation (Placement(transformation(extent={{160,-80},{140,-60}})));
+    inner System system
+      annotation (Placement(transformation(extent={{-200,80},{-180,100}})));
+
+  equation
+    connect(ramp.y,shellIn1. in_h) annotation (Line(
+        points={{139,-70},{126,-70},{126,-38}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(shellIn.flange, primary_loop.fromDRACS) annotation (Line(
+        points={{-160,10},{-140,10}},
+        color={0,127,255},
+        smooth=Smooth.None));
+    connect(shellOut.flange, primary_loop.toDRACS) annotation (Line(
+        points={{-160,-10},{-140,-10}},
+        color={0,127,255},
+        smooth=Smooth.None));
+    connect(steam_generator.shellOutlet, shellOut1.flange) annotation (Line(
+        points={{78,-8},{120,-8}},
+        color={0,127,255},
+        smooth=Smooth.None));
+    connect(shellIn1.flange, steam_generator.shellInlet) annotation (Line(
+        points={{120,-32},{32,-32},{32,9},{42,9}},
+        color={0,127,255},
+        smooth=Smooth.None));
+
+     annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+              -200,-100},{200,100}}), graphics),
+      experiment(StopTime=1000, __Dymola_NumberOfIntervals=1000),
+      __Dymola_experimentSetupOutput);
+  end Rx2Sg1;
+
+
+  model Rx2PCS
+    import ORNL_AdvSMR;
+
+    import Modelica.Math.Vectors.*;
+
+    extends Architecture.Rx2PCS(
+      redeclare Implementations.PrimaryHeatTransportSystem.PRISM_PHTS1_noRx
+        primary_loop(
+        H_fuelPin=4.0132,
+        H_coreChannel=4.0132,
+        FFtype=ORNL_AdvSMR.Choices.Flow1D.FFtypes.Colebrook,
+        Q_nom=425e6/2),
+      redeclare Implementations.IntermediateHeatExchanger.PRISM_IHX1
+        intermediate_heat_exchanger(
+        flowPathLength=1,
+        shellDiameter=1,
+        shellFlowArea=1,
+        shellPerimeter=1,
+        shellHeatTrArea=1,
+        shellWallThickness=1,
+        tubeDiameter=1,
+        tubeHeatTrArea=1,
+        tubeWallRho=1,
+        tubeWallCp=1,
+        tubeWallK=1,
+        tubeWallThickness=1,
+        Twall_start=773.15),
+      redeclare
+        Implementations.IntermediateHeatTransportSystem.PRISM_IHTS_simple_noPD
+        intermediate_loop(nNodes=10),
+      redeclare Implementations.EventDriver.PRISM_ED1 eventDriver,
+      redeclare Implementations.ControlSystem.PRISM_CS1 controlSystem,
+      redeclare Implementations.SteamGenerator.PRISM_SteamGenerator1
+        steam_generator(
+        redeclare package tubeMedium =
+            ORNL_AdvSMR.Media.Fluids.Water.StandardWater,
+        redeclare package shellMedium = ORNL_AdvSMR.Media.Fluids.Na,
+        flowPathLength=1,
+        shellDiameter=1,
+        shellFlowArea=1,
+        shellPerimeter=1,
+        shellHeatTrArea=1,
+        shellWallThickness=1,
+        tubeFlowArea=1,
+        tubePerimeter=1,
+        tubeHeatTrArea=1,
+        tubeWallThickness=1,
+        tubeWallRho=1,
+        tubeWallCp=1,
+        tubeWallK=1,
+        Twall_start=573.15),
+      redeclare
+        ORNL_AdvSMR.Implementations.PowerConversionSystem.PRISM_PCS1_2_noCond
+        power_conversion_system);
+
+    inner System system
+      annotation (Placement(transformation(extent={{-10,-100},{10,-80}})));
+    Components.SourceW sodiumIn(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=1248.31e3,
+      w0=655.19,
+      p0=6653000)
+      annotation (Placement(transformation(extent={{10,10},{-10,-10}},
+          rotation=180,
+          origin={-170,10})));
+    Components.SinkP sodiumOut(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=1248.31e3,
+      p0=6653000)
+      annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={-170,-10})));
+
+    UserInteraction.Outputs.SpatialPlot spatialPlot(
+      x=linspace(
+          0,
+          1,
+          8),
+      minX=0,
+      maxX=1,
+      y=primary_loop.core.T .- 273.15,
+      minY=300,
+      maxY=500)
+      annotation (Placement(transformation(extent={{-210,24},{-70,106}})));
+    UserInteraction.Outputs.SpatialPlot2 spatialPlot2_1(
+      x1=linspace(
+          0,
+          1,
+          10),
+      x2=linspace(
+          0,
+          1,
+          10),
+      y2=reverse(intermediate_heat_exchanger.tube.T) .- 273.15,
+      y1=intermediate_heat_exchanger.shell.T .- 273.15,
+      maxY1=600,
+      maxY2=600,
+      minY1=200,
+      minY2=200)
+      annotation (Placement(transformation(extent={{-208,-104},{-84,-16}})));
+    UserInteraction.Outputs.NumericValue numericValue(             input_Value=
+          primary_loop.core.T[8] - 273.15, precision=1)
+      annotation (Placement(transformation(extent={{-98,8},{-84,22}})));
+    UserInteraction.Outputs.NumericValue numericValue1(             input_Value=
+         primary_loop.core.T[1] - 273.15, precision=1)
+      annotation (Placement(transformation(extent={{-98,-12},{-84,2}})));
+    UserInteraction.Outputs.NumericValue numericValue2(precision=1, input_Value=
+          time) annotation (Placement(transformation(extent={{-10,60},{10,80}})));
+
+
+    ORNL_AdvSMR.PRISM.PowerConversionSystem.ElectricGeneratorGroup.Examples.SingleShaft_static
+      singleShaft_static1(
+      eta=0.9,
+      omega_nom=3.1416*60*2/2,
+      Pn=8.88e12,
+      fn=50,
+      J_shaft=10000,
+      SSInit=false)
+      annotation (Placement(transformation(extent={{160,-20},{200,20}})));
+  equation
+    connect(primary_loop.toDRACS, sodiumOut.flange) annotation (Line(
+        points={{-140,-10},{-160,-10}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+    connect(primary_loop.fromDRACS, sodiumIn.flange) annotation (Line(
+        points={{-140,10},{-160,10}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+
+    connect(power_conversion_system.rotorShaft, singleShaft_static1.shaft)
+      annotation (Line(
+        points={{140,0},{160,0}},
+        color={0,0,0},
+        smooth=Smooth.None,
+        thickness=1));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,
+              -100},{200,100}}), graphics),
+      experiment(
+        StopTime=5000,
+        __Dymola_NumberOfIntervals=1000,
+        Tolerance=1e-006),
+      __Dymola_experimentSetupOutput);
+  end Rx2PCS;
+
+  model Rx2PCS1
+
+    extends Architecture.Rx2PCS(
+      redeclare Implementations.PrimaryHeatTransportSystem.PRISM_PHTS1_noPD
+        primary_loop,
+      redeclare Implementations.IntermediateHeatExchanger.PRISM_IHX1
+        intermediate_heat_exchanger(
+        flowPathLength=1,
+        shellDiameter=1,
+        shellFlowArea=1,
+        shellPerimeter=1,
+        shellHeatTrArea=1,
+        shellWallThickness=1,
+        tubeDiameter=1,
+        tubeHeatTrArea=1,
+        tubeWallRho=1,
+        tubeWallCp=1,
+        tubeWallK=1,
+        tubeWallThickness=1,
+        Twall_start=773.15),
+      redeclare
+        Implementations.IntermediateHeatTransportSystem.PRISM_IHTS_simple_noPD
+        intermediate_loop,
+      redeclare Implementations.SteamGenerator.PRISM_SteamGenerator1
+        steam_generator(
+        redeclare package shellMedium = Modelica.Media.Examples.TwoPhaseWater,
+        redeclare package tubeMedium = ORNL_AdvSMR.Media.Fluids.Na,
+        flowPathLength=1,
+        tubeFlowArea=1,
+        tubePerimeter=1,
+        tubeHeatTrArea=1,
+        tubeWallThickness=1,
+        tubeWallRho=1,
+        tubeWallCp=1,
+        tubeWallK=1,
+        shellDiameter=1,
+        shellFlowArea=1,
+        shellPerimeter=1,
+        shellHeatTrArea=1,
+        shellWallThickness=1,
+        Twall_start=773.15),
+      redeclare Implementations.PowerConversionSystem.PRISM_PCS1_2
+        power_conversion_system,
+      redeclare Implementations.EventDriver.PRISM_ED1 eventDriver,
+      redeclare Implementations.ControlSystem.PRISM_CS1 controlSystem);
+
+    inner System system
+      annotation (Placement(transformation(extent={{-200,80},{-180,100}})));
+    Components.SourceW dRACSin(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=1248.31e3,
+      w0=655.19,
+      p0=6653000) annotation (Placement(transformation(
+          extent={{10,-10},{-10,10}},
+          rotation=180,
+          origin={-170,10})));
+    Components.SinkP dRACSout(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=1248.31e3,
+      p0=6653000) annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={-170,-10})));
+
+  equation
+    connect(primary_loop.toDRACS, dRACSout.flange) annotation (Line(
+        points={{-140,-10},{-160,-10}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+    connect(primary_loop.fromDRACS, dRACSin.flange) annotation (Line(
+        points={{-140,10},{-160,10}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,
+              -100},{200,100}}), graphics), Icon(coordinateSystem(
+            preserveAspectRatio=false, extent={{-200,-100},{200,100}}),
+          graphics));
+  end Rx2PCS1;
+
+  model Rx2Grid
+
+    extends Architecture.Rx2Grid(
+      redeclare Implementations.PrimaryHeatTransportSystem.PRISM_PHTS1_noPD
+        primary_loop,
+      redeclare Implementations.IntermediateHeatExchanger.PRISM_IHX1
+        intermediate_heat_exchanger(
+        flowPathLength=1,
+        shellDiameter=1,
+        shellFlowArea=1,
+        shellPerimeter=1,
+        shellHeatTrArea=1,
+        shellWallThickness=1,
+        tubeDiameter=1,
+        tubeHeatTrArea=1,
+        tubeWallRho=1,
+        tubeWallCp=1,
+        tubeWallK=1,
+        tubeWallThickness=1,
+        Twall_start=773.15),
+      redeclare
+        Implementations.IntermediateHeatTransportSystem.PRISM_IHTS_simple_noPD
+        intermediate_loop,
+      redeclare Implementations.SteamGenerator.PRISM_SteamGenerator1
+        steam_generator(
+        redeclare package shellMedium = Modelica.Media.Examples.TwoPhaseWater,
+        redeclare package tubeMedium = ORNL_AdvSMR.Media.Fluids.Na,
+        flowPathLength=1,
+        tubeFlowArea=1,
+        tubePerimeter=1,
+        tubeHeatTrArea=1,
+        tubeWallThickness=1,
+        tubeWallRho=1,
+        tubeWallCp=1,
+        tubeWallK=1,
+        shellDiameter=1,
+        shellFlowArea=1,
+        shellPerimeter=1,
+        shellHeatTrArea=1,
+        shellWallThickness=1,
+        Twall_start=773.15),
+      redeclare Implementations.PowerConversionSystem.PRISM_PCS1_2
+        power_conversion_system,
+      redeclare Implementations.EventDriver.PRISM_ED1 eventDriver,
+      redeclare Implementations.ControlSystem.PRISM_CS1 controlSystem,
+      redeclare Implementations.ElectricalGenerator.PRISM_G1
+        singleShaftGenerator);
+
+    inner System system
+      annotation (Placement(transformation(extent={{-200,80},{-180,100}})));
+    Components.SourceW dRACSin(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=1248.31e3,
+      w0=655.19,
+      p0=6653000) annotation (Placement(transformation(
+          extent={{10,-10},{-10,10}},
+          rotation=180,
+          origin={-182,10})));
+    Components.SinkP dRACSout(
+      redeclare package Medium = ORNL_AdvSMR.Media.Fluids.Na,
+      h=1248.31e3,
+      p0=6653000) annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={-182,-10})));
+
+  equation
+    connect(primary_loop.toDRACS, dRACSout.flange) annotation (Line(
+        points={{-160,-10},{-172,-10}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+    connect(primary_loop.fromDRACS, dRACSin.flange) annotation (Line(
+        points={{-160,10},{-172,10}},
+        color={0,127,255},
+        smooth=Smooth.None,
+        thickness=0.5));
+
+    connect(controlSystem.controlBus, power_conversion_system.controlBus)
+      annotation (Line(
+        points={{60,-62},{60,-40},{100,-40},{100,-18.8}},
+        color={255,204,51},
+        thickness=0.5,
+        smooth=Smooth.None));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,
+              -100},{200,100}}), graphics));
+  end Rx2Grid;
+end PlantSystems;

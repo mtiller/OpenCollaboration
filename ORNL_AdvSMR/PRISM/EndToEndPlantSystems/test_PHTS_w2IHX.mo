@@ -1,0 +1,219 @@
+within ORNL_AdvSMR.PRISM.EndToEndPlantSystems;
+model test_PHTS_w2IHX
+
+  // number of Nodes
+  parameter Integer nNodes=9 "Number of axial nodes";
+
+  inner System system(Dynamics=ORNL_AdvSMR.Choices.System.Dynamics.SteadyState,
+      allowFlowReversal=true)
+    annotation (Placement(transformation(extent={{-80,80},{-100,100}})));
+
+  PrimaryHeatTransportSystem.PrimaryHeatTransportSystem
+    primaryHeatTransportSystem(nNodes=10)
+    annotation (Placement(transformation(extent={{-80,-25},{-40,15}})));
+  PowerSystems.HeatExchangers.IntermediateHeatExchanger
+    intermediateHeatExchanger(
+    redeclare package shellMedium = ORNL_AdvSMR.Media.Fluids.Na,
+    redeclare package tubeMedium = ORNL_AdvSMR.Media.Fluids.Na,
+    nNodes=nNodes,
+    flowPathLength=1,
+    shellDiameter=1,
+    shellFlowArea=1,
+    shellPerimeter=1,
+    shellHeatTrArea=1,
+    shellWallThickness=1,
+    tubeFlowArea=1,
+    tubePerimeter=1,
+    tubeHeatTrArea=1,
+    tubeWallRho=1,
+    tubeWallCp=1,
+    tubeWallK=1,
+    allowFlowReversal=true,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    momentumDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
+    tubeWallThickness=1,
+    Twall_start=278.15)
+    annotation (Placement(transformation(extent={{-5,50},{35,10}})));
+  IntermediateHeatTransportSystem.IntermediateLoopBlock_wFluidPorts
+    intermediateHeatTransportSystem(nNodes=nNodes)
+    annotation (Placement(transformation(extent={{50,25},{90,65}})));
+
+  Components.CounterCurrentConvection counterCurrentConvection1(nNodes=nNodes)
+    annotation (Placement(transformation(extent={{87.5,35},{107.5,55}})));
+  Thermal.HeatSource1D heatSink(
+    N=nNodes,
+    L=5.04,
+    omega=Modelica.Constants.pi*15.875e-3,
+    redeclare ORNL_AdvSMR.Thermal.DHThtc wall) annotation (Placement(
+        transformation(
+        extent={{-10,5},{10,-5}},
+        rotation=90,
+        origin={109.5,45})));
+
+  Modelica.Blocks.Sources.Ramp ramp(
+    startTime=0,
+    height=0,
+    duration=1,
+    offset=-1.56e5)
+    annotation (Placement(transformation(extent={{125,40},{115,50}})));
+
+  Modelica.Blocks.Sources.Trapezoid rho_CR(
+    nperiod=1,
+    period=1000,
+    offset=0,
+    width=100,
+    startTime=2000,
+    amplitude=1e-4,
+    rising=100,
+    falling=100) annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=0,
+        origin={-90,9})));
+  Components.FlowSplit flowSplit(redeclare package Medium =
+        ORNL_AdvSMR.Media.Fluids.Na)
+    annotation (Placement(transformation(extent={{-33.5,-1},{-13.5,19}})));
+  Components.FlowJoin flowJoin(redeclare package Medium =
+        ORNL_AdvSMR.Media.Fluids.Na)
+    annotation (Placement(transformation(extent={{-15,-20},{-35,0}})));
+  IntermediateHeatTransportSystem.IntermediateLoopBlock_wFluidPorts
+    intermediateHeatTransportSystem1(nNodes=nNodes)
+    annotation (Placement(transformation(extent={{50,-50},{90,-10}})));
+  Components.CounterCurrentConvection counterCurrentConvection2(nNodes=nNodes)
+    annotation (Placement(transformation(extent={{87.5,-40},{107.5,-20}})));
+  Thermal.HeatSource1D heatSink1(
+    N=nNodes,
+    L=5.04,
+    omega=Modelica.Constants.pi*15.875e-3,
+    redeclare ORNL_AdvSMR.Thermal.DHThtc wall) annotation (Placement(
+        transformation(
+        extent={{-10,5},{10,-5}},
+        rotation=90,
+        origin={109.5,-30})));
+  Modelica.Blocks.Sources.Ramp ramp1(
+    startTime=0,
+    height=0,
+    duration=1,
+    offset=-1.56e5)
+    annotation (Placement(transformation(extent={{125,-35},{115,-25}})));
+  PowerSystems.HeatExchangers.IntermediateHeatExchanger
+    intermediateHeatExchanger1(
+    redeclare package shellMedium = ORNL_AdvSMR.Media.Fluids.Na,
+    redeclare package tubeMedium = ORNL_AdvSMR.Media.Fluids.Na,
+    nNodes=nNodes,
+    flowPathLength=1,
+    shellDiameter=1,
+    shellFlowArea=1,
+    shellPerimeter=1,
+    shellHeatTrArea=1,
+    shellWallThickness=1,
+    tubeFlowArea=1,
+    tubePerimeter=1,
+    tubeHeatTrArea=1,
+    tubeWallRho=1,
+    tubeWallCp=1,
+    tubeWallK=1,
+    allowFlowReversal=true,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    momentumDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
+    tubeWallThickness=1,
+    Twall_start=278.15)
+    annotation (Placement(transformation(extent={{-5,-20},{35,-60}})));
+equation
+  connect(heatSink.power, ramp.y) annotation (Line(
+      points={{111.5,45},{114.5,45}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(intermediateHeatTransportSystem.intermediateOut,
+    counterCurrentConvection1.shellSide) annotation (Line(
+      points={{91,45},{97.5,45}},
+      color={255,127,0},
+      smooth=Smooth.None));
+  connect(counterCurrentConvection1.tubeSide, heatSink.wall) annotation (Line(
+      points={{102.5,45},{108,45}},
+      color={255,127,0},
+      smooth=Smooth.None));
+
+  connect(rho_CR.y, primaryHeatTransportSystem.rho_CR) annotation (Line(
+      points={{-84.5,9},{-82.5,9},{-82.5,10},{-79.0476,10}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(primaryHeatTransportSystem.primaryOut, flowSplit.in1) annotation (
+      Line(
+      points={{-40.9524,10},{-35,10},{-35,9},{-29.5,9}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(flowSplit.out1, intermediateHeatExchanger.shellInlet) annotation (
+      Line(
+      points={{-17.5,13},{-10,13},{-10,20},{-5,20}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(primaryHeatTransportSystem.primaryReturn, flowJoin.out) annotation (
+      Line(
+      points={{-40.9524,5},{-35,5},{-35,-10},{-31,-10}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(heatSink1.power, ramp1.y) annotation (Line(
+      points={{111.5,-30},{114.5,-30}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(intermediateHeatTransportSystem1.intermediateOut,
+    counterCurrentConvection2.shellSide) annotation (Line(
+      points={{91,-30},{97.5,-30}},
+      color={255,127,0},
+      smooth=Smooth.None));
+  connect(counterCurrentConvection2.tubeSide, heatSink1.wall) annotation (Line(
+      points={{102.5,-30},{108,-30}},
+      color={255,127,0},
+      smooth=Smooth.None));
+  connect(intermediateHeatExchanger.shellOutlet, flowJoin.in1) annotation (Line(
+      points={{34,37},{40,37},{40,-6},{-19,-6}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(intermediateHeatExchanger.tubeOutlet, intermediateHeatTransportSystem.ihxIn)
+    annotation (Line(
+      points={{15,52},{15,61.5},{50,61.5}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(intermediateHeatTransportSystem.ihxOut, intermediateHeatExchanger.tubeInlet)
+    annotation (Line(
+      points={{50,56.5},{45,56.5},{45,0},{15,0},{15,8}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(flowSplit.out2, intermediateHeatExchanger1.shellInlet) annotation (
+      Line(
+      points={{-17.5,5},{-10,5},{-10,-50},{-5,-50}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(intermediateHeatExchanger1.shellOutlet, flowJoin.in2) annotation (
+      Line(
+      points={{34,-33},{40,-33},{40,-75},{-15,-75},{-15,-14},{-19,-14}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(intermediateHeatExchanger1.tubeOutlet,
+    intermediateHeatTransportSystem1.ihxIn) annotation (Line(
+      points={{15,-18},{15,-13.5},{50,-13.5}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(intermediateHeatTransportSystem1.ihxOut, intermediateHeatExchanger1.tubeInlet)
+    annotation (Line(
+      points={{50,-18.5},{45,-18.5},{45,-70},{15,-70},{15,-62}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  annotation (
+    Diagram(coordinateSystem(
+        preserveAspectRatio=false,
+        extent={{-100,-100},{100,100}},
+        grid={0.5,0.5}), graphics),
+    Icon(coordinateSystem(
+        preserveAspectRatio=false,
+        extent={{-100,-100},{100,100}},
+        grid={0.5,0.5})),
+    experiment(
+      StopTime=10000,
+      __Dymola_NumberOfIntervals=1000,
+      Tolerance=1e-006,
+      __Dymola_Algorithm="Cvode"),
+    __Dymola_experimentSetupOutput);
+end test_PHTS_w2IHX;

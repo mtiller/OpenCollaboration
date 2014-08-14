@@ -1,0 +1,7 @@
+within ORNL_AdvSMR.Media;
+package Alloys "Thermophysical properties of common alloys"
+
+
+extends Modelica.Icons.MaterialPropertiesPackage;
+
+end Alloys;

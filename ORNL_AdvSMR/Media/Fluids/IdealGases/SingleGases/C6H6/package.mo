@@ -1,0 +1,11 @@
+within ORNL_AdvSMR.Media.Fluids.IdealGases.SingleGases;
+package C6H6 "Ideal gas \"C6H6\" from NASA Glenn coefficients"
+extends Common.SingleGasNasa(
+  mediumName="Benzene",
+  data=Common.SingleGasesData.C6H6,
+  fluidConstants={Common.FluidData.C6H6});
+
+
+annotation (Documentation(info="<HTML>
+      <IMG src=\"modelica://Modelica/Resources/Images/Media/IdealGases/SingleGases/C6H6.png\"></HTML>"));
+end C6H6;

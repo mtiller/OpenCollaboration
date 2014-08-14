@@ -1,0 +1,10 @@
+baseFlow
+basePower
+baseEfficiency
+linearFlow
+quadraticFlow
+polynomialFlow
+constantPower
+linearPower
+quadraticPower
+constantEfficiency

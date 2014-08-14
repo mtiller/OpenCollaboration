@@ -1,0 +1,19 @@
+within ORNL_AdvSMR;
+package SmAHTR "This package contains components, systems, interfaces and functions for a liquid-salt-cooled Small Advanced High-Temperature Reactor (SmAHTR)."
+
+
+
+
+
+
+
+
+
+  annotation (Diagram(coordinateSystem(
+        preserveAspectRatio=true,
+        extent={{-100,-100},{100,100}},
+        grid={1,1}), graphics), Icon(coordinateSystem(
+        preserveAspectRatio=true,
+        extent={{-100,-100},{100,100}},
+        grid={1,1}), graphics));
+end SmAHTR;

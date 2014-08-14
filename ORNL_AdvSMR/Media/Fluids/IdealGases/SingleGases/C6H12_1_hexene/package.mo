@@ -1,0 +1,11 @@
+within ORNL_AdvSMR.Media.Fluids.IdealGases.SingleGases;
+package C6H12_1_hexene "Ideal gas \"C6H12_1_hexene\" from NASA Glenn coefficients"
+extends Common.SingleGasNasa(
+  mediumName="1-Hexene",
+  data=Common.SingleGasesData.C6H12_1_hexene,
+  fluidConstants={Common.FluidData.C6H12_1_hexene});
+
+
+annotation (Documentation(info="<HTML>
+      <IMG src=\"modelica://Modelica/Resources/Images/Media/IdealGases/SingleGases/C6H12_1_hexene.png\"></HTML>"));
+end C6H12_1_hexene;

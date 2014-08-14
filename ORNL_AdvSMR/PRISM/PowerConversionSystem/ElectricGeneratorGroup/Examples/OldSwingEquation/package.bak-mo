@@ -1,0 +1,4 @@
+within ORNL_AdvSMR.PRISM.PowerConversionSystem.ElectricGeneratorGroup.Examples;
+package OldSwingEquation 
+
+end OldSwingEquation;
